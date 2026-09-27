@@ -305,5 +305,25 @@ Format: Atomic Logging `[Timestamp] - [Fase] - [Apa | Kenapa | Dampak]`
   6. Mengompilasi ulang production bundle Vite (`npm run build`).
 - **Kenapa**: Menindaklanjuti koreksi dari Mr Zeps bahwa nomenklatur resmi seksi yang tepat di Kecamatan Caringin adalah Seksi Kesejahteraan Rakyat (Kesra), bukan Kesejahteraan Sosial.
 - **Dampaknya**: Nomenklatur di dashboard, laporan, matriks seksi, otentikasi akun, dan database telah terstandarisasi menjadi Seksi Kesejahteraan Rakyat (Kesra).
+- **Status**: Completed ✅ (Deployed).
+- **Blockers**: Tidak ada.
+
+### [2026-09-27 22:35] - Pembaruan Nama Resmi Sistem Menjadi SIMPEL KAN
+- **Apa**:
+  1. Mengubah nama sistem menjadi **SIMPEL KAN** dengan kepanjangan resmi **Sistem Pencetakan Pelaporan Pembelanjaan Kecamatan**.
+  2. Memperbarui `APP_NAME="SIMPEL KAN"` pada `.env`, `.env.example`, dan `.env.production`.
+  3. Memperbarui judul aplikasi di `resources/views/app.blade.php`: `<title inertia>{{ config('app.name', 'SIMPEL KAN - Kecamatan Caringin') }}</title>`.
+  4. Menyelaraskan teks branding antarmuka pada:
+     - `GuestLayout.jsx` (halaman Login & Auth): judul `SIMPEL KAN` dan subjudul `Sistem Pencetakan Pelaporan Pembelanjaan Kecamatan`.
+     - `Sidebar.jsx` (navigasi): logo alt `Logo SIMPEL KAN` dan teks brand header `SIMPEL KAN`.
+     - `ApplicationLogo.jsx` dan `Welcome.jsx`: atribut alt logo diselaraskan menjadi `Logo SIMPEL KAN Kecamatan Caringin`.
+     - `Kegiatan/Index.jsx`: `<Head title="Kegiatan Anggaran - SIMPEL KAN" />`.
+  5. Menyelaraskan seluruh judul dokumen dan bab pada berkas dokumentasi tanpa mengubah screenshot:
+     - `docs/MANUAL_BOOK_SIKEMAS.html`: Judul cover, judul halaman, Bab 1.1 "Tentang SIMPEL KAN", alur modul, dan footer. Seluruh tag gambar `<img src="images/..." />` tetap dipertahankan utuh.
+     - `SIKEMAS-Rancangan-Sistem.md`: Judul header dan ringkasan proyek.
+     - `docs/PANDUAN_DEPLOYMENT_VPS.md`, `docs/SOP_PENGGUNAAN_SIKEMAS.md`, `docs/UAT_CHECKLIST.md`, `docs/CHECKLIST_ONBOARDING_STAF.md`, dan `qa_audit_report.md`.
+  6. Menjalankan verifikasi automated test suite (`php artisan test`) - seluruh 80 tests lulus 100% (472 assertions) dan build aset Vite (`npm run build`).
+- **Kenapa**: Memenuhi permintaan Mr Zeps untuk mengubah nama sistem menjadi SIMPEL KAN (Sistem pencetakan pelaporan pembelanjaan kecamatan), termasuk memperbarui judul di seluruh dokumentasi tanpa mengubah gambar screenshot.
+- **Dampaknya**: Seluruh identitas visual, brand header, layout otentikasi, title bar tab browser, dan berkas dokumentasi resmi kini secara konsisten menyandang nama **SIMPEL KAN**.
 - **Status**: Completed ✅.
 - **Blockers**: Tidak ada.

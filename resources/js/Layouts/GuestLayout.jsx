@@ -11,10 +11,10 @@ export default function GuestLayout({ children }) {
                     </div>
                 </Link>
                 <h1 className="mt-3 text-2xl font-black tracking-wider text-neutral-900">
-                    SIKEMAS
+                    SIMPEL KAN
                 </h1>
                 <p className="text-xs font-medium text-neutral-500 max-w-sm mt-0.5">
-                    Sistem Informasi Keuangan & Aset Terintegrasi<br />
+                    Sistem Pencetakan Pelaporan Pembelanjaan Kecamatan<br />
                     Kecamatan Caringin
                 </p>
             </div>

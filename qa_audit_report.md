@@ -1,8 +1,8 @@
-# 🛡️ LAPORAN AUDIT QA SENIOR — SIKEMAS KECAMATAN CARINGIN
+# 🛡️ LAPORAN AUDIT QA SENIOR — SIMPEL KAN KECAMATAN CARINGIN
 
 > **Tanggal Audit**: 27 September 2026  
 > **Auditor**: Jarvis (Senior QA & Lead System Auditor)  
-> **Objek Audit**: SIKEMAS (Sistem Informasi Keuangan & Aset Terintegrasi Kecamatan Caringin)  
+> **Objek Audit**: SIMPEL KAN (Sistem Pencetakan Pelaporan Pembelanjaan Kecamatan)  
 > **Status Sistem Keseluruhan**: **STABIL DENGAN TEMUAN PERBAIKAN KRITIS (Conditional Pass)**
 
 ---

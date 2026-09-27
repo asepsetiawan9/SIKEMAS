@@ -1,5 +1,5 @@
-# SIKEMAS
-### Sistem Informasi Keuangan dan Aset Terintegrasi — Kecamatan Caringin
+# SIMPEL KAN
+### Sistem Pencetakan Pelaporan Pembelanjaan Kecamatan — Kecamatan Caringin
 **Dokumen Rancangan & Instruksi Pengembangan Lengkap (Siap Pakai untuk AI Coding Assistant)**
 
 ---
@@ -8,7 +8,7 @@
 
 | Item | Detail |
 |---|---|
-| Nama Aplikasi | SIKEMAS |
+| Nama Aplikasi | SIMPEL KAN |
 | Instansi | Kecamatan Caringin |
 | Acuan | RAP SI-MASKET (Kec. Kadungora) & pola SIMANTAP |
 | Lingkup | Internal kecamatan saja — tidak ada integrasi dinas eksternal |

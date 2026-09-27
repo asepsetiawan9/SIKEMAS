@@ -4,7 +4,7 @@
         <meta charset="utf-8">
         <meta name="viewport" content="width=device-width, initial-scale=1">
 
-        <title inertia>{{ config('app.name', 'SIKEMAS - Kecamatan Caringin') }}</title>
+        <title inertia>{{ config('app.name', 'SIMPEL KAN - Kecamatan Caringin') }}</title>
 
         <!-- Favicon -->
         <link rel="icon" type="image/png" href="{{ asset('logo.png') }}">

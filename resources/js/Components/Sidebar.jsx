@@ -315,12 +315,12 @@ export default function Sidebar({ collapsed, setCollapsed, mobileOpen, setMobile
                         className="flex items-center gap-3 overflow-hidden focus:outline-none"
                     >
                         <div className="w-10 h-10 rounded-xl bg-white/10 p-1 flex items-center justify-center shrink-0 border border-white/20 shadow-inner overflow-hidden">
-                            <img src="/logo.png" alt="Logo SIKEMAS" className="w-full h-full object-contain" />
+                            <img src="/logo.png" alt="Logo SIMPEL KAN" className="w-full h-full object-contain" />
                         </div>
                         {!collapsed && (
                             <div className="flex flex-col min-w-0">
                                 <span className="font-bold text-lg tracking-wider text-white leading-tight">
-                                    SIKEMAS
+                                    SIMPEL KAN
                                 </span>
                                 <span className="text-[11px] text-white/70 truncate">
                                     Kecamatan Caringin

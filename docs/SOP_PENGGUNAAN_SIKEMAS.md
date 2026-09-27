@@ -1,10 +1,10 @@
-# 📘 STANDAR OPERASIONAL PROSEDUR (SOP) PENGGUNAAN SIKEMAS
-## SISTEM INFORMASI KEUANGAN DAN ASET TERINTEGRASI
+# 📘 STANDAR OPERASIONAL PROSEDUR (SOP) PENGGUNAAN SIMPEL KAN
+## SISTEM PENCETAKAN PELAPORAN PEMBELANJAAN KECAMATAN
 ### KECAMATAN CARINGIN — KABUPATEN GARUT
 
 ---
 
-Dokumen ini disusun sebagai panduan operasional baku bagi seluruh aparatur di lingkungan Pemerintah Kecamatan Caringin dalam memanfaatkan aplikasi **SIKEMAS** untuk mewujudkan akuntabilitas pengelolaan anggaran kegiatan, tertib administrasi SPJ digital, dan transparansi inventarisasi Barang Milik Daerah (BMD).
+Dokumen ini disusun sebagai panduan operasional baku bagi seluruh aparatur di lingkungan Pemerintah Kecamatan Caringin dalam memanfaatkan aplikasi **SIMPEL KAN** untuk mewujudkan akuntabilitas pengelolaan anggaran kegiatan, tertib administrasi SPJ digital, dan transparansi inventarisasi Barang Milik Daerah (BMD).
 
 ---
 

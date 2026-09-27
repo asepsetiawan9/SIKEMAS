@@ -210,7 +210,7 @@ export default function Index({
 
     return (
         <AuthenticatedLayout title="Daftar Kegiatan Anggaran">
-            <Head title="Kegiatan Anggaran - SIKEMAS" />
+            <Head title="Kegiatan Anggaran - SIMPEL KAN" />
 
             <div className="space-y-6">
                 {/* Header Section */}

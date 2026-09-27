@@ -27,7 +27,7 @@ export default function Welcome({ auth, laravelVersion, phpVersion }) {
                             <div className="flex lg:col-start-2 lg:justify-center">
                                 <img
                                     src="/logo.png"
-                                    alt="Logo SIKEMAS Kecamatan Caringin"
+                                    alt="Logo SIMPEL KAN Kecamatan Caringin"
                                     className="h-16 w-auto object-contain drop-shadow-sm"
                                 />
                             </div>

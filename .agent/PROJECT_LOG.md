@@ -292,9 +292,18 @@ Format: Atomic Logging `[Timestamp] - [Fase] - [Apa | Kenapa | Dampak]`
   7. Menjalankan verifikasi regression test suite via `php artisan test` (80 tests, 472 assertions lulus 100%).
 - **Kenapa**: Memenuhi permintaan Mr Zeps untuk mengubah semua logo di aplikasi menjadi menggunakan berkas `pkp-caringin/public/logo.png`.
 - **Dampaknya**: Seluruh antarmuka publik, otentikasi (login), dashboard internal, sidebar navigasi, dan favicon browser kini secara konsisten dan elegan menampilkan logo resmi Kecamatan Caringin.
-- **Status**: Completed ✅ (Local Ready, Menunggu instruksi Mr Zeps sebelum git push/deploy).
+- **Status**: Completed ✅ (Deployed).
 - **Blockers**: Tidak ada.
 
-
-
-
+### [2026-09-27 22:25] - Penyesuaian Nomenklatur Seksi: Kesejahteraan Rakyat (Kesra)
+- **Apa**:
+  1. Memperbarui enum `App\Enums\SeksiType.php` dari `KESSOS = 'kessos'` (Kesejahteraan Sosial) menjadi `KESRA = 'kesra'` (Kesejahteraan Rakyat).
+  2. Membuat migrasi database `database/migrations/2026_09_27_222500_update_kessos_to_kesra_in_users_table.php` untuk memperbarui atribut `seksi`, `jabatan`, `name`, dan `email` user dari `kessos`/`kasi.kessos@sikemas.test` menjadi `kesra`/`kasi.kesra@sikemas.test` di tabel `users`.
+  3. Memperbarui `database/seeders/UserSeeder.php` dan `database/seeders/KegiatanSeeder.php` agar menggunakan akun Kasi Kesra (`kasi.kesra@sikemas.test`).
+  4. Menyelaraskan seluruh dokumentasi sistem: `SIKEMAS-Rancangan-Sistem.md`, `docs/MANUAL_BOOK_SIKEMAS.html`, `docs/UAT_CHECKLIST.md`, `docs/SOP_PENGGUNAAN_SIKEMAS.md`, dan `docs/CHECKLIST_ONBOARDING_STAF.md`.
+  5. Menjalankan migrasi lokal dan automated regression test suite (`php artisan test`) - seluruh 80 test passed 100% (472 assertions).
+  6. Mengompilasi ulang production bundle Vite (`npm run build`).
+- **Kenapa**: Menindaklanjuti koreksi dari Mr Zeps bahwa nomenklatur resmi seksi yang tepat di Kecamatan Caringin adalah Seksi Kesejahteraan Rakyat (Kesra), bukan Kesejahteraan Sosial.
+- **Dampaknya**: Nomenklatur di dashboard, laporan, matriks seksi, otentikasi akun, dan database telah terstandarisasi menjadi Seksi Kesejahteraan Rakyat (Kesra).
+- **Status**: Completed ✅.
+- **Blockers**: Tidak ada.

@@ -9,7 +9,7 @@ enum SeksiType: string
     case PEMERINTAHAN = 'pemerintahan';
     case TRANTIB = 'trantib';
     case PMD = 'pmd';
-    case KESSOS = 'kessos';
+    case KESRA = 'kesra';
     case PELAYANAN = 'pelayanan';
 
     public function label(): string
@@ -18,7 +18,7 @@ enum SeksiType: string
             self::PEMERINTAHAN => 'Pemerintahan',
             self::TRANTIB => 'Ketentraman & Ketertiban',
             self::PMD => 'Pemberdayaan Masyarakat Desa',
-            self::KESSOS => 'Kesejahteraan Sosial',
+            self::KESRA => 'Kesejahteraan Rakyat',
             self::PELAYANAN => 'Pelayanan Umum',
         };
     }

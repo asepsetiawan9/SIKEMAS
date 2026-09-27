@@ -527,7 +527,7 @@ camat:
 | `pemerintahan` | Pemerintahan |
 | `trantib` | Ketentraman & Ketertiban |
 | `pmd` | Pemberdayaan Masyarakat Desa |
-| `kessos` | Kesejahteraan Sosial |
+| `kesra` | Kesejahteraan Rakyat |
 | `pelayanan` | Pelayanan Umum |
 
 ### Daftar Sumber Dana (Enum: `SumberDana`)
@@ -549,7 +549,7 @@ camat:
 | `SpjStatus` | `draft`, `diajukan_kasi`, `dikonsolidasi`, `diajukan_verifikasi`, `diverifikasi`, `ditolak` |
 | `KondisiAset` | `baik`, `rusak_ringan`, `rusak_berat` |
 | `JenisKibKir` | `KIB`, `KIR` |
-| `SeksiType` | `pemerintahan`, `trantib`, `pmd`, `kessos`, `pelayanan` |
+| `SeksiType` | `pemerintahan`, `trantib`, `pmd`, `kesra`, `pelayanan` |
 | `SumberDana` | `APBD`, `DAU`, `DAK`, `BHP`, `ADD`, `LAINNYA` |
 | `StatusKegiatan` | `aktif`, `selesai`, `dibatalkan` |
 | `CaraPerolehan` | `pembelian`, `hibah`, `sumbangan`, `produksi_sendiri`, `lainnya` |
@@ -965,8 +965,8 @@ camat:
 | Admin Keuangan | keuangan@sikemas.test | staf_keuangan | — | 198601012010011002 | password |
 | Kasi Pemerintahan | kasi.pem@sikemas.test | kasi | pemerintahan | 197801012005011001 | password |
 | Kasi Trantib | kasi.trantib@sikemas.test | kasi | trantib | 197901012005011002 | password |
-| Kasi PMD | kasi.pmd@sikemas.test | kasi | pmd | 198001012005011003 | password |
-| Kasi Kessos | kasi.kessos@sikemas.test | kasi | kessos | 198101012005011004 | password |
+| `Kasi PMD` | kasi.pmd@sikemas.test | kasi | pmd | 198001012005011003 | password |
+| Kasi Kesra | kasi.kesra@sikemas.test | kasi | kesra | 198101012005011004 | password |
 | Kasi Pelayanan | kasi.pelayanan@sikemas.test | kasi | pelayanan | 198201012005011005 | password |
 | Sekretaris Kecamatan | sekmat@sikemas.test | sekmat | — | 197501012000011001 | password |
 | Camat Caringin | camat@sikemas.test | camat | — | 197001011998011001 | password |
@@ -978,7 +978,7 @@ camat:
 | Musrenbang Tingkat Kecamatan | 25.000.000 | 2026 | Kasi Pemerintahan | APBD | aktif |
 | Operasi Yustisi Gabungan | 15.000.000 | 2026 | Kasi Trantib | APBD | aktif |
 | Pelatihan UMKM Desa | 30.000.000 | 2026 | Kasi PMD | DAK | aktif |
-| Bantuan Sosial PKH | 50.000.000 | 2026 | Kasi Kessos | APBD | aktif |
+| Bantuan Sosial PKH | 50.000.000 | 2026 | Kasi Kesra | APBD | aktif |
 | Pelayanan KTP-el dan KK | 10.000.000 | 2026 | Kasi Pelayanan | DAU | aktif |
 
 ### Aset (5 data contoh)

@@ -82,12 +82,12 @@ class UserSeeder extends Seeder
                 'no_hp' => '081234567805',
             ],
             [
-                'name' => 'Kasi Kessos',
-                'email' => 'kasi.kessos@sikemas.test',
+                'name' => 'Kasi Kesra',
+                'email' => 'kasi.kesra@sikemas.test',
                 'role' => UserRole::KASI,
-                'seksi' => SeksiType::KESSOS,
+                'seksi' => SeksiType::KESRA,
                 'nip' => '198101012005011004',
-                'jabatan' => 'Kepala Seksi Kesejahteraan Sosial',
+                'jabatan' => 'Kepala Seksi Kesejahteraan Rakyat',
                 'no_hp' => '081234567806',
             ],
             [

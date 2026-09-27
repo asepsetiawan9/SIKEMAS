@@ -20,7 +20,8 @@ class KegiatanSeeder extends Seeder
         $kasiPem = User::where('email', 'kasi.pem@sikemas.test')->firstOrFail();
         $kasiTrantib = User::where('email', 'kasi.trantib@sikemas.test')->firstOrFail();
         $kasiPmd = User::where('email', 'kasi.pmd@sikemas.test')->firstOrFail();
-        $kasiKessos = User::where('email', 'kasi.kessos@sikemas.test')->firstOrFail();
+        $kasiKesra = User::where('email', 'kasi.kesra@sikemas.test')->first()
+            ?? User::where('email', 'kasi.kessos@sikemas.test')->firstOrFail();
         $kasiPelayanan = User::where('email', 'kasi.pelayanan@sikemas.test')->firstOrFail();
 
         $items = [
@@ -70,7 +71,7 @@ class KegiatanSeeder extends Seeder
                 'deskripsi' => 'Fasilitasi pendataan dan monitoring penyaluran bantuan sosial Program Keluarga Harapan.',
                 'periode_mulai' => '2026-01-15',
                 'periode_selesai' => '2026-12-15',
-                'kasi_id' => $kasiKessos->id,
+                'kasi_id' => $kasiKesra->id,
             ],
             [
                 'nama' => 'Pelayanan KTP-el dan KK',

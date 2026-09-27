@@ -1,0 +1,1780 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Manual Book SIKEMAS - Kecamatan Caringin</title>
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap');
+
+        :root {
+            --primary: #1e5fa8;
+            --primary-light: #e8f0fd;
+            --secondary: #2d3748;
+            --success: #22c55e;
+            --warning: #f59e0b;
+            --danger: #ef4444;
+            --text: #1a202c;
+            --text-secondary: #64748b;
+            --border: #e2e8f0;
+            --bg: #ffffff;
+            --bg-gray: #f8fafc;
+        }
+
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+
+        body {
+            font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+            color: var(--text);
+            line-height: 1.7;
+            font-size: 11pt;
+            background: var(--bg);
+        }
+
+        /* ===== PRINT STYLES ===== */
+        @media print {
+            body { font-size: 10pt; }
+            .page-break { page-break-before: always; }
+            .no-break { page-break-inside: avoid; }
+            .cover-page { page-break-after: always; }
+            img { max-width: 100% !important; }
+            .toc a { color: var(--text) !important; }
+        }
+
+        @page {
+            size: A4;
+            margin: 2cm 2.5cm;
+        }
+
+        /* ===== COVER PAGE ===== */
+        .cover-page {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            min-height: 90vh;
+            text-align: center;
+            padding: 40px;
+        }
+
+        .cover-logo {
+            width: 120px;
+            height: 120px;
+            background: linear-gradient(135deg, var(--primary), #3b82f6);
+            border-radius: 24px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin-bottom: 40px;
+            box-shadow: 0 20px 60px rgba(30, 95, 168, 0.3);
+        }
+
+        .cover-logo span {
+            color: white;
+            font-size: 48px;
+            font-weight: 800;
+        }
+
+        .cover-title {
+            font-size: 32pt;
+            font-weight: 800;
+            color: var(--primary);
+            margin-bottom: 8px;
+            letter-spacing: -0.5px;
+        }
+
+        .cover-subtitle {
+            font-size: 16pt;
+            font-weight: 500;
+            color: var(--secondary);
+            margin-bottom: 40px;
+        }
+
+        .cover-app-name {
+            font-size: 14pt;
+            color: var(--text-secondary);
+            margin-bottom: 4px;
+        }
+
+        .cover-institution {
+            font-size: 12pt;
+            color: var(--text-secondary);
+            margin-bottom: 60px;
+        }
+
+        .cover-meta {
+            border-top: 2px solid var(--border);
+            padding-top: 24px;
+            font-size: 10pt;
+            color: var(--text-secondary);
+        }
+
+        .cover-meta table {
+            margin: 0 auto;
+            text-align: left;
+        }
+
+        .cover-meta td {
+            padding: 4px 12px;
+        }
+
+        .cover-meta td:first-child {
+            font-weight: 600;
+            color: var(--secondary);
+        }
+
+        /* ===== TABLE OF CONTENTS ===== */
+        .toc {
+            padding: 30px 0;
+        }
+
+        .toc h2 {
+            font-size: 20pt;
+            color: var(--primary);
+            margin-bottom: 24px;
+            padding-bottom: 12px;
+            border-bottom: 3px solid var(--primary);
+        }
+
+        .toc ol {
+            list-style: none;
+            counter-reset: toc-counter;
+        }
+
+        .toc > ol > li {
+            counter-increment: toc-counter;
+            margin-bottom: 6px;
+        }
+
+        .toc > ol > li > a {
+            display: flex;
+            align-items: baseline;
+            padding: 8px 0;
+            text-decoration: none;
+            color: var(--text);
+            font-weight: 600;
+            font-size: 11pt;
+            border-bottom: 1px dotted var(--border);
+        }
+
+        .toc > ol > li > a::before {
+            content: counter(toc-counter) ".";
+            width: 30px;
+            flex-shrink: 0;
+            color: var(--primary);
+            font-weight: 700;
+        }
+
+        .toc ol ol {
+            list-style: none;
+            padding-left: 30px;
+            counter-reset: toc-sub;
+        }
+
+        .toc ol ol li {
+            counter-increment: toc-sub;
+        }
+
+        .toc ol ol li a {
+            display: flex;
+            padding: 4px 0;
+            text-decoration: none;
+            color: var(--text-secondary);
+            font-size: 10pt;
+            border-bottom: 1px dotted #f1f5f9;
+        }
+
+        .toc ol ol li a::before {
+            content: counter(toc-counter) "." counter(toc-sub);
+            width: 40px;
+            flex-shrink: 0;
+            color: var(--primary);
+            font-weight: 500;
+        }
+
+        /* ===== HEADINGS ===== */
+        h1 {
+            font-size: 22pt;
+            font-weight: 800;
+            color: var(--primary);
+            margin-bottom: 16px;
+            padding-bottom: 12px;
+            border-bottom: 3px solid var(--primary);
+        }
+
+        h2 {
+            font-size: 16pt;
+            font-weight: 700;
+            color: var(--secondary);
+            margin-top: 32px;
+            margin-bottom: 12px;
+            padding-bottom: 8px;
+            border-bottom: 2px solid var(--border);
+        }
+
+        h3 {
+            font-size: 13pt;
+            font-weight: 600;
+            color: var(--primary);
+            margin-top: 24px;
+            margin-bottom: 8px;
+        }
+
+        h4 {
+            font-size: 11pt;
+            font-weight: 600;
+            color: var(--secondary);
+            margin-top: 16px;
+            margin-bottom: 6px;
+        }
+
+        /* ===== CONTENT ===== */
+        p {
+            margin-bottom: 10px;
+            text-align: justify;
+        }
+
+        .section {
+            margin-bottom: 36px;
+        }
+
+        /* ===== SCREENSHOT ===== */
+        .screenshot-container {
+            margin: 16px 0 24px;
+            text-align: center;
+            page-break-inside: avoid;
+        }
+
+        .screenshot-container img {
+            max-width: 100%;
+            border: 1px solid var(--border);
+            border-radius: 8px;
+            box-shadow: 0 4px 12px rgba(0,0,0,0.1);
+        }
+
+        .screenshot-caption {
+            font-size: 9pt;
+            color: var(--text-secondary);
+            font-style: italic;
+            margin-top: 8px;
+        }
+
+        /* ===== TABLES ===== */
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            margin: 12px 0 20px;
+            font-size: 10pt;
+        }
+
+        th {
+            background: var(--primary);
+            color: white;
+            font-weight: 600;
+            text-align: left;
+            padding: 10px 12px;
+        }
+
+        td {
+            padding: 8px 12px;
+            border-bottom: 1px solid var(--border);
+        }
+
+        tr:nth-child(even) td {
+            background: var(--bg-gray);
+        }
+
+        /* ===== STEPS / NUMBERED LIST ===== */
+        .steps {
+            counter-reset: step-counter;
+            list-style: none;
+            padding-left: 0;
+            margin: 12px 0;
+        }
+
+        .steps li {
+            counter-increment: step-counter;
+            padding: 10px 12px 10px 48px;
+            margin-bottom: 8px;
+            position: relative;
+            background: var(--bg-gray);
+            border-radius: 8px;
+            border-left: 3px solid var(--primary);
+        }
+
+        .steps li::before {
+            content: counter(step-counter);
+            position: absolute;
+            left: 12px;
+            top: 10px;
+            width: 24px;
+            height: 24px;
+            background: var(--primary);
+            color: white;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 10pt;
+            font-weight: 700;
+        }
+
+        /* ===== ALERT BOXES ===== */
+        .alert {
+            padding: 12px 16px;
+            border-radius: 8px;
+            margin: 12px 0;
+            font-size: 10pt;
+            page-break-inside: avoid;
+        }
+
+        .alert-info {
+            background: #eff6ff;
+            border-left: 4px solid #3b82f6;
+            color: #1e40af;
+        }
+
+        .alert-warning {
+            background: #fffbeb;
+            border-left: 4px solid #f59e0b;
+            color: #92400e;
+        }
+
+        .alert-success {
+            background: #f0fdf4;
+            border-left: 4px solid #22c55e;
+            color: #166534;
+        }
+
+        .alert-danger {
+            background: #fef2f2;
+            border-left: 4px solid #ef4444;
+            color: #991b1b;
+        }
+
+        .alert strong {
+            display: block;
+            margin-bottom: 4px;
+        }
+
+        /* ===== BADGE ===== */
+        .badge {
+            display: inline-block;
+            padding: 2px 10px;
+            border-radius: 12px;
+            font-size: 9pt;
+            font-weight: 600;
+        }
+        .badge-blue { background: #dbeafe; color: #1e40af; }
+        .badge-green { background: #dcfce7; color: #166534; }
+        .badge-amber { background: #fef3c7; color: #92400e; }
+        .badge-red { background: #fecaca; color: #991b1b; }
+        .badge-gray { background: #f1f5f9; color: #475569; }
+        .badge-indigo { background: #e0e7ff; color: #3730a3; }
+
+        /* ===== CODE ===== */
+        code {
+            font-family: 'Consolas', 'Monaco', monospace;
+            background: var(--bg-gray);
+            padding: 2px 6px;
+            border-radius: 4px;
+            font-size: 9pt;
+            color: var(--primary);
+        }
+
+        /* ===== FLOW DIAGRAM ===== */
+        .flow-diagram {
+            display: flex;
+            align-items: center;
+            flex-wrap: wrap;
+            gap: 8px;
+            margin: 16px 0;
+            padding: 16px;
+            background: var(--bg-gray);
+            border-radius: 8px;
+        }
+
+        .flow-step {
+            padding: 8px 16px;
+            background: white;
+            border: 2px solid var(--primary);
+            border-radius: 8px;
+            font-size: 9pt;
+            font-weight: 600;
+            color: var(--primary);
+            text-align: center;
+        }
+
+        .flow-arrow {
+            font-size: 16pt;
+            color: var(--primary);
+            font-weight: 700;
+        }
+
+        .flow-step.active {
+            background: var(--primary);
+            color: white;
+        }
+
+        /* ===== FOOTER ===== */
+        .doc-footer {
+            margin-top: 60px;
+            padding-top: 20px;
+            border-top: 2px solid var(--border);
+            text-align: center;
+            font-size: 9pt;
+            color: var(--text-secondary);
+        }
+
+        /* ===== UTILITY ===== */
+        .text-center { text-align: center; }
+        .mt-20 { margin-top: 20px; }
+        .mb-20 { margin-bottom: 20px; }
+        .highlight { background: #fef9c3; padding: 2px 4px; }
+    </style>
+</head>
+<body>
+
+<!-- ============================================== -->
+<!-- COVER PAGE -->
+<!-- ============================================== -->
+<div class="cover-page">
+    <div class="cover-logo">
+        <span>S</span>
+    </div>
+    <div class="cover-title">MANUAL BOOK</div>
+    <div class="cover-subtitle">Panduan Penggunaan Sistem</div>
+    <div class="cover-app-name"><strong>SIKEMAS</strong></div>
+    <div class="cover-app-name">Sistem Informasi Keuangan dan Aset Terintegrasi</div>
+    <div class="cover-institution">Kecamatan Caringin — Kabupaten Garut</div>
+
+    <div class="cover-meta">
+        <table>
+            <tr><td>Versi Dokumen</td><td>: 1.0</td></tr>
+            <tr><td>Tanggal</td><td>: September 2026</td></tr>
+            <tr><td>URL Aplikasi</td><td>: https://sikemas.initd.web.id</td></tr>
+            <tr><td>Klasifikasi</td><td>: Internal — Kecamatan Caringin</td></tr>
+        </table>
+    </div>
+</div>
+
+<!-- ============================================== -->
+<!-- TABLE OF CONTENTS -->
+<!-- ============================================== -->
+<div class="page-break"></div>
+<div class="toc">
+    <h2>Daftar Isi</h2>
+    <ol>
+        <li>
+            <a href="#bab1">Pendahuluan</a>
+            <ol>
+                <li><a href="#bab1-1">Tentang SIKEMAS</a></li>
+                <li><a href="#bab1-2">Tujuan Manual Book</a></li>
+                <li><a href="#bab1-3">Peran Pengguna (Role)</a></li>
+                <li><a href="#bab1-4">Kebutuhan Sistem</a></li>
+            </ol>
+        </li>
+        <li>
+            <a href="#bab2">Login & Autentikasi</a>
+            <ol>
+                <li><a href="#bab2-1">Cara Login ke Sistem</a></li>
+                <li><a href="#bab2-2">Logout dari Sistem</a></li>
+            </ol>
+        </li>
+        <li>
+            <a href="#bab3">Dashboard</a>
+            <ol>
+                <li><a href="#bab3-1">Dashboard Staf Keuangan / Sekmat</a></li>
+                <li><a href="#bab3-2">Dashboard Kasi</a></li>
+                <li><a href="#bab3-3">Dashboard Sekmat (Verifikasi)</a></li>
+            </ol>
+        </li>
+        <li>
+            <a href="#bab4">Modul SPJ Digital</a>
+            <ol>
+                <li><a href="#bab4-1">Pengajuan SPJ Baru (Kasi)</a></li>
+                <li><a href="#bab4-2">Konsolidasi SPJ (Staf Keuangan)</a></li>
+                <li><a href="#bab4-3">Verifikasi SPJ (Sekmat)</a></li>
+                <li><a href="#bab4-4">Arsip SPJ</a></li>
+                <li><a href="#bab4-5">Detail SPJ</a></li>
+                <li><a href="#bab4-6">Alur Status SPJ</a></li>
+            </ol>
+        </li>
+        <li>
+            <a href="#bab5">Modul Kegiatan Anggaran</a>
+            <ol>
+                <li><a href="#bab5-1">Daftar Kegiatan</a></li>
+                <li><a href="#bab5-2">Tambah Kegiatan Baru</a></li>
+                <li><a href="#bab5-3">Edit & Hapus Kegiatan</a></li>
+            </ol>
+        </li>
+        <li>
+            <a href="#bab6">Modul Aset / BMD</a>
+            <ol>
+                <li><a href="#bab6-1">Daftar Aset</a></li>
+                <li><a href="#bab6-2">Tambah Aset Baru</a></li>
+                <li><a href="#bab6-3">Detail Aset</a></li>
+                <li><a href="#bab6-4">QR Code & KIB/KIR</a></li>
+            </ol>
+        </li>
+        <li>
+            <a href="#bab7">Modul Laporan</a>
+            <ol>
+                <li><a href="#bab7-1">Halaman Laporan</a></li>
+                <li><a href="#bab7-2">Export PDF & Excel</a></li>
+            </ol>
+        </li>
+        <li>
+            <a href="#bab8">Notifikasi</a>
+            <ol>
+                <li><a href="#bab8-1">Pusat Notifikasi</a></li>
+                <li><a href="#bab8-2">Jenis Notifikasi</a></li>
+            </ol>
+        </li>
+        <li>
+            <a href="#bab9">Profil Pengguna</a>
+            <ol>
+                <li><a href="#bab9-1">Edit Profil</a></li>
+                <li><a href="#bab9-2">Ubah Password</a></li>
+            </ol>
+        </li>
+        <li>
+            <a href="#bab10">Lampiran — Daftar Akun & Hak Akses</a>
+        </li>
+    </ol>
+</div>
+
+<!-- ============================================== -->
+<!-- BAB 1: PENDAHULUAN -->
+<!-- ============================================== -->
+<div class="page-break"></div>
+<div class="section" id="bab1">
+    <h1>BAB 1 — Pendahuluan</h1>
+
+    <h2 id="bab1-1">1.1 Tentang SIKEMAS</h2>
+    <p>
+        <strong>SIKEMAS (Sistem Informasi Keuangan dan Aset Terintegrasi)</strong> adalah aplikasi berbasis web 
+        yang dirancang khusus untuk membantu proses pengelolaan keuangan dan aset di lingkungan 
+        <strong>Kecamatan Caringin, Kabupaten Garut</strong>.
+    </p>
+    <p>Sistem ini mencakup beberapa modul utama:</p>
+    <table>
+        <tr>
+            <th>Modul</th>
+            <th>Fungsi</th>
+        </tr>
+        <tr>
+            <td><strong>SPJ Digital</strong></td>
+            <td>Pengajuan, konsolidasi, dan verifikasi Surat Pertanggungjawaban keuangan secara digital</td>
+        </tr>
+        <tr>
+            <td><strong>Kegiatan Anggaran</strong></td>
+            <td>Pengelolaan data kegiatan dan pagu anggaran per tahun</td>
+        </tr>
+        <tr>
+            <td><strong>Aset / BMD</strong></td>
+            <td>Pencatatan, monitoring kondisi, QR Code, dan dokumen KIB/KIR aset milik daerah</td>
+        </tr>
+        <tr>
+            <td><strong>Laporan</strong></td>
+            <td>Rekap realisasi anggaran dengan fitur export PDF dan Excel</td>
+        </tr>
+        <tr>
+            <td><strong>Notifikasi</strong></td>
+            <td>Pemberitahuan real-time untuk setiap aksi penting dalam sistem</td>
+        </tr>
+        <tr>
+            <td><strong>Dashboard</strong></td>
+            <td>Ringkasan eksekutif keuangan dan aset sesuai peran pengguna</td>
+        </tr>
+    </table>
+
+    <h2 id="bab1-2">1.2 Tujuan Manual Book</h2>
+    <p>Manual book ini disusun untuk memberikan panduan lengkap dan detail kepada seluruh pengguna sistem SIKEMAS, agar:</p>
+    <ul style="margin-left: 20px; margin-bottom: 12px;">
+        <li>Pengguna memahami fungsi dan fitur dari setiap modul</li>
+        <li>Pengguna dapat mengoperasikan sistem secara mandiri</li>
+        <li>Meminimalkan kesalahan operasional dalam penggunaan sistem</li>
+        <li>Menjadi referensi jika terdapat kendala teknis saat menggunakan aplikasi</li>
+    </ul>
+
+    <h2 id="bab1-3">1.3 Peran Pengguna (Role)</h2>
+    <p>SIKEMAS memiliki 5 peran pengguna utama dengan hak akses yang berbeda-beda:</p>
+    <table>
+        <tr>
+            <th>No</th>
+            <th>Peran (Role)</th>
+            <th>Deskripsi</th>
+            <th>Modul yang Diakses</th>
+        </tr>
+        <tr>
+            <td>1</td>
+            <td><strong>Staf Kasubag Umum</strong></td>
+            <td>Mengelola data kondisi dan lokasi aset</td>
+            <td>Aset</td>
+        </tr>
+        <tr>
+            <td>2</td>
+            <td><strong>Staf Keuangan</strong></td>
+            <td>Mengelola keuangan, konsolidasi SPJ, input aset, kelola kegiatan</td>
+            <td>Dashboard, SPJ, Kegiatan, Aset, Laporan</td>
+        </tr>
+        <tr>
+            <td>3</td>
+            <td><strong>Kasi (Kepala Seksi)</strong></td>
+            <td>Mengajukan SPJ untuk kegiatan di seksinya (5 seksi)</td>
+            <td>Dashboard Kasi, Pengajuan SPJ</td>
+        </tr>
+        <tr>
+            <td>4</td>
+            <td><strong>Sekmat (Sekretaris Kecamatan)</strong></td>
+            <td>Memverifikasi/menolak SPJ, monitoring seluruh data</td>
+            <td>Dashboard, Verifikasi SPJ, Kegiatan, Aset, Laporan</td>
+        </tr>
+        <tr>
+            <td>5</td>
+            <td><strong>Camat</strong></td>
+            <td>Melihat ringkasan eksekutif (read-only)</td>
+            <td>Dashboard Eksekutif</td>
+        </tr>
+    </table>
+
+    <div class="alert alert-info">
+        <strong>ℹ️ Catatan:</strong>
+        Setiap pengguna hanya akan melihat menu sidebar sesuai dengan peran (role) yang diberikan oleh Administrator Sistem. Menu yang tidak relevan dengan peran tidak akan ditampilkan.
+    </div>
+
+    <h2 id="bab1-4">1.4 Kebutuhan Sistem</h2>
+    <p>Untuk mengakses SIKEMAS, pengguna memerlukan:</p>
+    <table>
+        <tr>
+            <th>Kebutuhan</th>
+            <th>Keterangan</th>
+        </tr>
+        <tr>
+            <td>Browser</td>
+            <td>Google Chrome (direkomendasikan), Mozilla Firefox, atau Microsoft Edge versi terbaru</td>
+        </tr>
+        <tr>
+            <td>Koneksi Internet</td>
+            <td>Stabil, minimal 1 Mbps</td>
+        </tr>
+        <tr>
+            <td>Resolusi Layar</td>
+            <td>Minimal 1366×768 piksel (laptop/desktop)</td>
+        </tr>
+        <tr>
+            <td>Akun</td>
+            <td>Email dan password yang telah didaftarkan oleh Administrator</td>
+        </tr>
+        <tr>
+            <td>URL Aplikasi</td>
+            <td><code>https://sikemas.initd.web.id</code></td>
+        </tr>
+    </table>
+</div>
+
+<!-- ============================================== -->
+<!-- BAB 2: LOGIN & AUTENTIKASI -->
+<!-- ============================================== -->
+<div class="page-break"></div>
+<div class="section" id="bab2">
+    <h1>BAB 2 — Login & Autentikasi</h1>
+
+    <h2 id="bab2-1">2.1 Cara Login ke Sistem</h2>
+    <p>Untuk masuk ke sistem SIKEMAS, ikuti langkah-langkah berikut:</p>
+
+    <ol class="steps">
+        <li>Buka browser (Google Chrome direkomendasikan) dan akses alamat: <code>https://sikemas.initd.web.id</code></li>
+        <li>Halaman <strong>Login</strong> akan tampil seperti gambar di bawah ini.</li>
+        <li>Masukkan <strong>Alamat Email</strong> yang telah didaftarkan pada kolom email.</li>
+        <li>Masukkan <strong>Password</strong> pada kolom password.</li>
+        <li>Centang opsi <strong>"Ingat Saya"</strong> jika ingin tetap login (opsional).</li>
+        <li>Klik tombol <strong>"Masuk ke Sistem"</strong> berwarna biru.</li>
+        <li>Jika berhasil, Anda akan diarahkan ke <strong>Dashboard</strong> sesuai peran Anda.</li>
+    </ol>
+
+    <div class="screenshot-container">
+        <img src="images/login_page.png" alt="Halaman Login SIKEMAS">
+        <div class="screenshot-caption">Gambar 2.1 — Halaman Login SIKEMAS</div>
+    </div>
+
+    <div class="alert alert-warning">
+        <strong>⚠️ Perhatian:</strong>
+        Jika Anda salah memasukkan password sebanyak 5 kali berturut-turut, akun Anda akan dikunci sementara selama 1 menit. Pastikan Anda memasukkan email dan password dengan benar.
+    </div>
+
+    <div class="alert alert-danger">
+        <strong>🔒 Keamanan:</strong>
+        Jangan pernah membagikan email dan password Anda kepada orang lain. Jika lupa password, hubungi Administrator Sistem untuk melakukan reset password.
+    </div>
+
+    <h2 id="bab2-2">2.2 Logout dari Sistem</h2>
+    <p>Untuk keluar dari sistem SIKEMAS:</p>
+
+    <ol class="steps">
+        <li>Klik pada <strong>nama pengguna</strong> atau <strong>ikon profil</strong> di pojok kanan atas halaman (area <em>Topbar</em>).</li>
+        <li>Akan muncul dropdown menu. Klik opsi <strong>"Keluar Sistem"</strong>.</li>
+        <li>Anda akan diarahkan kembali ke halaman Login.</li>
+    </ol>
+
+    <div class="alert alert-info">
+        <strong>ℹ️ Tips:</strong>
+        Selalu logout setelah selesai menggunakan sistem, terutama jika menggunakan komputer bersama (shared computer) untuk menjaga keamanan data.
+    </div>
+</div>
+
+<!-- ============================================== -->
+<!-- BAB 3: DASHBOARD -->
+<!-- ============================================== -->
+<div class="page-break"></div>
+<div class="section" id="bab3">
+    <h1>BAB 3 — Dashboard</h1>
+    <p>
+        Dashboard adalah halaman utama yang tampil setelah pengguna berhasil login. 
+        Tampilan dashboard berbeda-beda sesuai peran pengguna. Dashboard menyajikan ringkasan data 
+        keuangan dan aset secara visual menggunakan kartu statistik dan grafik interaktif.
+    </p>
+
+    <h2 id="bab3-1">3.1 Dashboard Staf Keuangan / Sekmat</h2>
+    <p>
+        Dashboard untuk Staf Keuangan dan Sekmat menampilkan informasi operasional yang komprehensif, meliputi:
+    </p>
+    <ul style="margin-left: 20px; margin-bottom: 12px;">
+        <li><strong>Kartu Statistik:</strong> Total Pagu Anggaran, Total Realisasi, Sisa Anggaran, dan Jumlah SPJ</li>
+        <li><strong>Grafik Realisasi:</strong> Grafik batang perbandingan realisasi per kegiatan</li>
+        <li><strong>SPJ Terbaru:</strong> Daftar SPJ terbaru yang masuk untuk ditindaklanjuti</li>
+        <li><strong>Peringatan Pagu:</strong> Notifikasi visual jika ada kegiatan yang realisasinya mendekati atau melebihi 80% pagu</li>
+    </ul>
+
+    <div class="screenshot-container">
+        <img src="images/dashboard_staf_keuangan.png" alt="Dashboard Staf Keuangan">
+        <div class="screenshot-caption">Gambar 3.1 — Dashboard Staf Keuangan / Sekmat</div>
+    </div>
+
+    <h3>Penjelasan Elemen Dashboard:</h3>
+    <table>
+        <tr>
+            <th>Elemen</th>
+            <th>Keterangan</th>
+        </tr>
+        <tr>
+            <td><strong>Total Pagu</strong></td>
+            <td>Jumlah seluruh pagu anggaran dari semua kegiatan yang aktif pada tahun berjalan</td>
+        </tr>
+        <tr>
+            <td><strong>Realisasi</strong></td>
+            <td>Jumlah total SPJ yang sudah berstatus "Diverifikasi" (sudah sah)</td>
+        </tr>
+        <tr>
+            <td><strong>Sisa Anggaran</strong></td>
+            <td>Selisih antara Total Pagu dan Realisasi</td>
+        </tr>
+        <tr>
+            <td><strong>Jumlah SPJ</strong></td>
+            <td>Total SPJ yang telah diajukan dalam sistem</td>
+        </tr>
+        <tr>
+            <td><strong>Grafik</strong></td>
+            <td>Visualisasi perbandingan Pagu vs Realisasi per kegiatan dalam bentuk chart</td>
+        </tr>
+    </table>
+
+    <h2 id="bab3-2">3.2 Dashboard Kasi (Kepala Seksi)</h2>
+    <p>
+        Dashboard Kasi menampilkan ringkasan khusus untuk kegiatan dan SPJ milik seksi yang bersangkutan. 
+        Kasi hanya dapat melihat data kegiatan yang ditugaskan kepada seksinya sendiri.
+    </p>
+
+    <div class="screenshot-container">
+        <img src="images/dashboard_kasi.png" alt="Dashboard Kasi">
+        <div class="screenshot-caption">Gambar 3.2 — Dashboard Kasi</div>
+    </div>
+
+    <h3>Informasi yang Ditampilkan:</h3>
+    <ul style="margin-left: 20px; margin-bottom: 12px;">
+        <li><strong>Total Kegiatan Saya:</strong> Jumlah kegiatan yang ditugaskan ke seksi Kasi</li>
+        <li><strong>Total Pengajuan:</strong> Jumlah SPJ yang sudah pernah diajukan</li>
+        <li><strong>SPJ Diverifikasi:</strong> Jumlah SPJ yang sudah diverifikasi (disetujui)</li>
+        <li><strong>SPJ Ditolak:</strong> Jumlah SPJ yang ditolak dan perlu ditindaklanjuti</li>
+        <li><strong>Daftar Kegiatan:</strong> Tabel kegiatan beserta pagu dan sisa anggaran masing-masing</li>
+        <li><strong>Riwayat SPJ Terbaru:</strong> Daftar SPJ terbaru beserta status terkininya</li>
+    </ul>
+
+    <h2 id="bab3-3">3.3 Dashboard Sekmat (Verifikasi)</h2>
+    <p>
+        Dashboard Sekmat memiliki tampilan serupa dengan Dashboard Staf Keuangan, namun dengan penekanan pada 
+        jumlah SPJ yang menunggu verifikasi. Di sidebar, Sekmat akan melihat badge (angka) yang menunjukkan 
+        berapa SPJ yang perlu diverifikasi.
+    </p>
+
+    <div class="screenshot-container">
+        <img src="images/dashboard_sekmat.png" alt="Dashboard Sekmat">
+        <div class="screenshot-caption">Gambar 3.3 — Dashboard Sekmat</div>
+    </div>
+</div>
+
+<!-- ============================================== -->
+<!-- BAB 4: MODUL SPJ DIGITAL -->
+<!-- ============================================== -->
+<div class="page-break"></div>
+<div class="section" id="bab4">
+    <h1>BAB 4 — Modul SPJ Digital</h1>
+    <p>
+        Modul SPJ Digital adalah modul utama dalam SIKEMAS yang menangani seluruh alur pengajuan 
+        Surat Pertanggungjawaban (SPJ) keuangan, mulai dari pengajuan oleh Kasi, konsolidasi oleh 
+        Staf Keuangan, hingga verifikasi akhir oleh Sekretaris Kecamatan (Sekmat).
+    </p>
+
+    <h2 id="bab4-6">4.1 Alur Status SPJ</h2>
+    <p>Sebelum membahas fitur, penting untuk memahami alur status SPJ dalam sistem:</p>
+
+    <div class="flow-diagram">
+        <div class="flow-step"><strong>Draft</strong><br><small>Kasi menyiapkan</small></div>
+        <div class="flow-arrow">→</div>
+        <div class="flow-step" style="border-color: #3b82f6;"><strong>Diajukan Kasi</strong><br><small>Menunggu konsolidasi</small></div>
+        <div class="flow-arrow">→</div>
+        <div class="flow-step" style="border-color: #6366f1;"><strong>Dikonsolidasi</strong><br><small>Staf Keuangan proses</small></div>
+        <div class="flow-arrow">→</div>
+        <div class="flow-step" style="border-color: #f59e0b;"><strong>Diajukan Verifikasi</strong><br><small>Menunggu Sekmat</small></div>
+        <div class="flow-arrow">→</div>
+        <div class="flow-step active" style="background: #22c55e; border-color: #22c55e;"><strong>Diverifikasi ✅</strong><br><small>SPJ Sah</small></div>
+    </div>
+
+    <div class="alert alert-danger">
+        <strong>❌ Status Ditolak:</strong>
+        Jika Sekmat menolak SPJ, status akan menjadi <span class="badge badge-red">Ditolak</span> dan SPJ kembali ke Staf Keuangan untuk direvisi. Setelah revisi, status kembali ke <span class="badge badge-indigo">Dikonsolidasi</span>.
+    </div>
+
+    <h3>Penjelasan Warna Status:</h3>
+    <table>
+        <tr>
+            <th>Status</th>
+            <th>Warna Badge</th>
+            <th>Keterangan</th>
+        </tr>
+        <tr>
+            <td><span class="badge badge-gray">Draft</span></td>
+            <td>Abu-abu</td>
+            <td>SPJ baru dibuat, belum diajukan</td>
+        </tr>
+        <tr>
+            <td><span class="badge badge-blue">Diajukan Kasi</span></td>
+            <td>Biru</td>
+            <td>Kasi telah mengajukan, menunggu Staf Keuangan</td>
+        </tr>
+        <tr>
+            <td><span class="badge badge-indigo">Dikonsolidasi</span></td>
+            <td>Indigo</td>
+            <td>Staf Keuangan sudah konsolidasi, bisa diajukan ke Sekmat</td>
+        </tr>
+        <tr>
+            <td><span class="badge badge-amber">Diajukan Verifikasi</span></td>
+            <td>Kuning/Amber</td>
+            <td>Menunggu verifikasi Sekmat</td>
+        </tr>
+        <tr>
+            <td><span class="badge badge-green">Diverifikasi</span></td>
+            <td>Hijau</td>
+            <td>SPJ telah diverifikasi dan sah (final, tidak bisa diubah)</td>
+        </tr>
+        <tr>
+            <td><span class="badge badge-red">Ditolak</span></td>
+            <td>Merah</td>
+            <td>SPJ ditolak oleh Sekmat, perlu revisi</td>
+        </tr>
+    </table>
+
+    <!-- 4.1 Pengajuan SPJ Baru (Kasi) -->
+    <div class="page-break"></div>
+    <h2 id="bab4-1">4.2 Pengajuan SPJ Baru (Kasi)</h2>
+    <p>
+        Fitur ini digunakan oleh <strong>Kasi (Kepala Seksi)</strong> untuk membuat pengajuan SPJ baru. 
+        Kasi hanya dapat mengajukan SPJ untuk kegiatan yang ditugaskan kepada seksinya.
+    </p>
+
+    <h3>Langkah-langkah Pengajuan SPJ:</h3>
+    <ol class="steps">
+        <li>Login sebagai Kasi, kemudian klik menu <strong>"Pengajuan SPJ"</strong> di sidebar kiri.</li>
+        <li>Pada halaman daftar SPJ, klik tombol <strong>"+ Buat Pengajuan Baru"</strong> di pojok kanan atas.</li>
+        <li>Isi formulir pengajuan SPJ dengan lengkap (lihat gambar di bawah).</li>
+        <li>Pilih <strong>Kegiatan</strong> dari dropdown — hanya kegiatan milik seksi Anda yang tampil.</li>
+        <li>Sistem akan menampilkan <strong>Sisa Pagu</strong> kegiatan secara real-time di bawah dropdown.</li>
+        <li>Masukkan <strong>Nominal</strong> pengajuan (tidak boleh melebihi sisa pagu).</li>
+        <li>Pilih <strong>Periode Bulan</strong> dan <strong>Tahun</strong> SPJ.</li>
+        <li>Isi <strong>Jenis Belanja</strong> (contoh: Belanja ATK, Belanja Perjalanan Dinas, dll).</li>
+        <li>Upload <strong>File Bukti</strong> (format: JPG, PNG, atau PDF, maksimal 5 MB).</li>
+        <li>Klik tombol <strong>"Ajukan SPJ"</strong> untuk mengirim pengajuan.</li>
+    </ol>
+
+    <div class="screenshot-container">
+        <img src="images/spj_form_create.png" alt="Form Pengajuan SPJ">
+        <div class="screenshot-caption">Gambar 4.1 — Formulir Pengajuan SPJ Baru (Kasi)</div>
+    </div>
+
+    <div class="alert alert-warning">
+        <strong>⚠️ Aturan Bisnis Penting:</strong>
+        <ul style="margin: 6px 0 0 16px;">
+            <li>Nominal pengajuan <strong>tidak boleh melebihi sisa pagu</strong> kegiatan.</li>
+            <li>Kasi <strong>tidak bisa membuat pengajuan baru</strong> jika masih ada SPJ yang berstatus <span class="badge badge-red">Ditolak</span> dan belum ditindaklanjuti.</li>
+            <li>Satu kegiatan bisa memiliki <strong>banyak SPJ</strong> (partial spending diperbolehkan).</li>
+            <li>Kegiatan dengan status "Selesai" atau "Dibatalkan" tidak bisa menerima SPJ baru.</li>
+        </ul>
+    </div>
+
+    <h3>Daftar SPJ Milik Kasi</h3>
+    <p>Setelah mengajukan SPJ, Kasi dapat memantau status semua pengajuannya di halaman daftar SPJ:</p>
+
+    <div class="screenshot-container">
+        <img src="images/spj_kasi_list.png" alt="Daftar SPJ Kasi">
+        <div class="screenshot-caption">Gambar 4.2 — Daftar SPJ Milik Kasi</div>
+    </div>
+
+    <!-- 4.2 Konsolidasi SPJ (Staf Keuangan) -->
+    <div class="page-break"></div>
+    <h2 id="bab4-2">4.3 Konsolidasi SPJ (Staf Keuangan)</h2>
+    <p>
+        Setelah Kasi mengajukan SPJ, <strong>Staf Keuangan</strong> bertugas melakukan konsolidasi. 
+        Konsolidasi adalah proses verifikasi awal dan penetapan nomor SPJ resmi.
+    </p>
+
+    <h3>Langkah-langkah Konsolidasi:</h3>
+    <ol class="steps">
+        <li>Login sebagai Staf Keuangan, klik menu <strong>"SPJ"</strong> di sidebar.</li>
+        <li>Halaman Konsolidasi akan menampilkan daftar SPJ yang masuk dari semua Kasi.</li>
+        <li>Klik tombol <strong>"Lihat Detail"</strong> (ikon mata) pada SPJ yang ingin diproses.</li>
+        <li>Periksa informasi pengajuan: kegiatan, nominal, file bukti, dan kelengkapan data.</li>
+        <li>Klik tombol <strong>"Konsolidasi"</strong> untuk memproses SPJ. Sistem akan otomatis:
+            <ul style="margin-top: 4px; margin-left: 16px;">
+                <li>Membuat <strong>Nomor SPJ</strong> otomatis (format: <code>SPJ/SEKSI/BULAN/TAHUN/URUT</code>)</li>
+                <li>Mengubah status menjadi <span class="badge badge-indigo">Dikonsolidasi</span></li>
+            </ul>
+        </li>
+        <li>Setelah dikonsolidasi, klik <strong>"Ajukan ke Sekmat"</strong> untuk mengirim SPJ ke tahap verifikasi.</li>
+    </ol>
+
+    <div class="screenshot-container">
+        <img src="images/spj_konsolidasi.png" alt="Halaman Konsolidasi SPJ">
+        <div class="screenshot-caption">Gambar 4.3 — Halaman Konsolidasi SPJ (Staf Keuangan)</div>
+    </div>
+
+    <div class="alert alert-info">
+        <strong>ℹ️ Format Nomor SPJ Otomatis:</strong>
+        <code>SPJ/{NAMA_SEKSI}/{BULAN_ROMAWI}/{TAHUN}/{NOMOR_URUT}</code><br>
+        Contoh: <code>SPJ/PEMERINTAHAN/IX/2026/001</code>
+    </div>
+
+    <!-- 4.3 Verifikasi SPJ (Sekmat) -->
+    <div class="page-break"></div>
+    <h2 id="bab4-3">4.4 Verifikasi SPJ (Sekmat)</h2>
+    <p>
+        <strong>Sekretaris Kecamatan (Sekmat)</strong> memiliki wewenang untuk memverifikasi (menyetujui) 
+        atau menolak SPJ yang telah diajukan oleh Staf Keuangan.
+    </p>
+
+    <h3>Langkah-langkah Verifikasi:</h3>
+    <ol class="steps">
+        <li>Login sebagai Sekmat, klik menu <strong>"Verifikasi SPJ"</strong> di sidebar (perhatikan badge angka yang menunjukkan jumlah SPJ menunggu).</li>
+        <li>Halaman akan menampilkan <strong>Antrean Verifikasi</strong> — daftar SPJ yang statusnya <span class="badge badge-amber">Diajukan Verifikasi</span>.</li>
+        <li>Klik tombol <strong>"Lihat Detail"</strong> pada SPJ yang ingin diverifikasi.</li>
+        <li>Periksa semua informasi SPJ: data kegiatan, nominal, bukti fisik, nomor SPJ, dll.</li>
+        <li>Pilih salah satu aksi:
+            <ul style="margin-top: 4px; margin-left: 16px;">
+                <li><strong>✅ Verifikasi (Setujui):</strong> SPJ dinyatakan sah, status berubah menjadi <span class="badge badge-green">Diverifikasi</span></li>
+                <li><strong>❌ Tolak:</strong> SPJ ditolak. <em>Wajib</em> mengisi catatan penolakan (minimal 10 karakter).</li>
+            </ul>
+        </li>
+    </ol>
+
+    <div class="screenshot-container">
+        <img src="images/spj_verifikasi.png" alt="Halaman Verifikasi SPJ">
+        <div class="screenshot-caption">Gambar 4.4 — Halaman Verifikasi SPJ (Sekmat)</div>
+    </div>
+
+    <div class="alert alert-danger">
+        <strong>🔒 Penting:</strong>
+        SPJ yang sudah berstatus <span class="badge badge-green">Diverifikasi</span> bersifat <strong>FINAL dan IMMUTABLE</strong> — tidak bisa diubah atau dihapus oleh siapapun. Pastikan verifikasi dilakukan dengan teliti.
+    </div>
+
+    <!-- 4.4 Arsip SPJ -->
+    <h2 id="bab4-4">4.5 Arsip SPJ</h2>
+    <p>
+        Halaman Arsip SPJ menampilkan seluruh riwayat SPJ dalam bentuk tabel dengan fitur filter dan pencarian. 
+        Semua peran dapat mengakses arsip ini (dengan batasan sesuai hak akses masing-masing).
+    </p>
+
+    <h3>Fitur Filter yang Tersedia:</h3>
+    <table>
+        <tr>
+            <th>Filter</th>
+            <th>Keterangan</th>
+        </tr>
+        <tr>
+            <td><strong>Status</strong></td>
+            <td>Filter berdasarkan status SPJ (Draft, Diajukan, Dikonsolidasi, dll)</td>
+        </tr>
+        <tr>
+            <td><strong>Kegiatan</strong></td>
+            <td>Filter berdasarkan nama kegiatan anggaran</td>
+        </tr>
+        <tr>
+            <td><strong>Bulan</strong></td>
+            <td>Filter berdasarkan periode bulan SPJ</td>
+        </tr>
+        <tr>
+            <td><strong>Tahun</strong></td>
+            <td>Filter berdasarkan tahun anggaran</td>
+        </tr>
+        <tr>
+            <td><strong>Pencarian</strong></td>
+            <td>Cari berdasarkan nomor SPJ atau nama kegiatan</td>
+        </tr>
+    </table>
+
+    <!-- 4.5 Detail SPJ -->
+    <h2 id="bab4-5">4.6 Detail SPJ</h2>
+    <p>
+        Halaman detail SPJ menampilkan seluruh informasi lengkap tentang satu SPJ, termasuk:
+    </p>
+    <ul style="margin-left: 20px; margin-bottom: 12px;">
+        <li>Informasi pengajuan (kegiatan, nominal, jenis belanja, periode)</li>
+        <li>Status terkini dan timeline perubahan status</li>
+        <li>Data penanggung jawab di setiap tahap (pengaju, konsolidator, verifikator)</li>
+        <li>Preview file bukti yang diupload</li>
+        <li>Catatan verifikasi (jika ada penolakan)</li>
+        <li>Nomor SPJ resmi (setelah dikonsolidasi)</li>
+    </ul>
+
+    <div class="screenshot-container">
+        <img src="images/spj_detail.png" alt="Detail SPJ">
+        <div class="screenshot-caption">Gambar 4.5 — Halaman Detail SPJ</div>
+    </div>
+</div>
+
+<!-- ============================================== -->
+<!-- BAB 5: MODUL KEGIATAN ANGGARAN -->
+<!-- ============================================== -->
+<div class="page-break"></div>
+<div class="section" id="bab5">
+    <h1>BAB 5 — Modul Kegiatan Anggaran</h1>
+    <p>
+        Modul Kegiatan Anggaran digunakan oleh <strong>Staf Keuangan</strong> untuk mengelola data kegiatan 
+        dan pagu anggaran. Kegiatan inilah yang nantinya menjadi dasar pengajuan SPJ oleh Kasi.
+    </p>
+
+    <h2 id="bab5-1">5.1 Daftar Kegiatan</h2>
+    <p>
+        Halaman ini menampilkan seluruh kegiatan yang terdaftar dalam tahun anggaran berjalan, lengkap dengan 
+        informasi pagu, realisasi, dan sisa anggaran masing-masing kegiatan.
+    </p>
+
+    <div class="screenshot-container">
+        <img src="images/kegiatan_index.png" alt="Daftar Kegiatan">
+        <div class="screenshot-caption">Gambar 5.1 — Halaman Daftar Kegiatan Anggaran</div>
+    </div>
+
+    <h3>Kolom Informasi pada Tabel:</h3>
+    <table>
+        <tr>
+            <th>Kolom</th>
+            <th>Keterangan</th>
+        </tr>
+        <tr>
+            <td><strong>Nama Kegiatan</strong></td>
+            <td>Nama kegiatan anggaran</td>
+        </tr>
+        <tr>
+            <td><strong>Kode Rekening</strong></td>
+            <td>Kode rekening anggaran kegiatan</td>
+        </tr>
+        <tr>
+            <td><strong>Pagu</strong></td>
+            <td>Jumlah anggaran yang dialokasikan (dalam Rupiah)</td>
+        </tr>
+        <tr>
+            <td><strong>Realisasi</strong></td>
+            <td>Jumlah anggaran yang sudah terpakai (SPJ diverifikasi)</td>
+        </tr>
+        <tr>
+            <td><strong>Sisa</strong></td>
+            <td>Pagu dikurangi Realisasi</td>
+        </tr>
+        <tr>
+            <td><strong>Kasi</strong></td>
+            <td>Kepala Seksi yang bertanggung jawab atas kegiatan</td>
+        </tr>
+        <tr>
+            <td><strong>Sumber Dana</strong></td>
+            <td>Sumber pendanaan (APBD, DAU, DAK, BHP, ADD, Lainnya)</td>
+        </tr>
+        <tr>
+            <td><strong>Status</strong></td>
+            <td>Aktif, Selesai, atau Dibatalkan</td>
+        </tr>
+    </table>
+
+    <h2 id="bab5-2">5.2 Tambah Kegiatan Baru</h2>
+    <p>Untuk menambahkan kegiatan anggaran baru (hanya Staf Keuangan):</p>
+
+    <ol class="steps">
+        <li>Pada halaman Daftar Kegiatan, klik tombol <strong>"+ Tambah Kegiatan"</strong>.</li>
+        <li>Akan muncul modal/formulir pengisian. Isi data berikut:
+            <ul style="margin-top: 4px; margin-left: 16px;">
+                <li><strong>Nama Kegiatan</strong> — Nama lengkap kegiatan anggaran</li>
+                <li><strong>Kode Rekening</strong> — Kode rekening sesuai APBD</li>
+                <li><strong>Pagu Anggaran</strong> — Jumlah anggaran (dalam Rupiah)</li>
+                <li><strong>Sumber Dana</strong> — Pilih dari dropdown (APBD, DAU, DAK, dll)</li>
+                <li><strong>Kasi Penanggung Jawab</strong> — Pilih Kasi dari dropdown</li>
+                <li><strong>Periode Mulai & Selesai</strong> — Rentang waktu kegiatan (opsional)</li>
+                <li><strong>Deskripsi</strong> — Keterangan tambahan (opsional)</li>
+            </ul>
+        </li>
+        <li>Klik tombol <strong>"Simpan"</strong> untuk menyimpan kegiatan baru.</li>
+    </ol>
+
+    <h2 id="bab5-3">5.3 Edit & Hapus Kegiatan</h2>
+    <p>Untuk mengedit kegiatan:</p>
+    <ol class="steps">
+        <li>Klik ikon <strong>edit (pensil)</strong> pada baris kegiatan yang ingin diubah.</li>
+        <li>Modal edit akan muncul dengan data kegiatan yang sudah terisi.</li>
+        <li>Ubah data yang diperlukan, lalu klik <strong>"Simpan Perubahan"</strong>.</li>
+    </ol>
+
+    <div class="alert alert-warning">
+        <strong>⚠️ Perhatian:</strong>
+        Kegiatan yang sudah memiliki SPJ <strong>tidak bisa dihapus</strong> untuk menjaga integritas data keuangan. 
+        Sebagai gantinya, ubah status kegiatan menjadi "Selesai" atau "Dibatalkan".
+    </div>
+</div>
+
+<!-- ============================================== -->
+<!-- BAB 6: MODUL ASET / BMD -->
+<!-- ============================================== -->
+<div class="page-break"></div>
+<div class="section" id="bab6">
+    <h1>BAB 6 — Modul Aset / BMD</h1>
+    <p>
+        Modul Aset / BMD (Barang Milik Daerah) digunakan untuk mencatat, memantau, dan mengelola 
+        seluruh aset milik Kecamatan Caringin. Modul ini mencakup pencatatan aset, monitoring kondisi, 
+        pembuatan QR Code, dan dokumen KIB/KIR.
+    </p>
+
+    <h2 id="bab6-1">6.1 Daftar Aset</h2>
+    <p>Halaman ini menampilkan seluruh aset yang tercatat dalam sistem dengan fitur filter dan pencarian.</p>
+
+    <div class="screenshot-container">
+        <img src="images/aset_index.png" alt="Daftar Aset">
+        <div class="screenshot-caption">Gambar 6.1 — Halaman Daftar Aset / BMD</div>
+    </div>
+
+    <h3>Kolom Informasi Aset:</h3>
+    <table>
+        <tr>
+            <th>Kolom</th>
+            <th>Keterangan</th>
+        </tr>
+        <tr>
+            <td><strong>Kode Barang</strong></td>
+            <td>Kode unik aset (format: Golongan.Sub/Urut/Tahun, contoh: 02.06/0012/2024)</td>
+        </tr>
+        <tr>
+            <td><strong>Nama</strong></td>
+            <td>Nama/deskripsi barang</td>
+        </tr>
+        <tr>
+            <td><strong>Tahun Perolehan</strong></td>
+            <td>Tahun aset diperoleh</td>
+        </tr>
+        <tr>
+            <td><strong>Nilai</strong></td>
+            <td>Nilai perolehan aset (dalam Rupiah)</td>
+        </tr>
+        <tr>
+            <td><strong>Kondisi</strong></td>
+            <td><span class="badge badge-green">Baik</span>, <span class="badge badge-amber">Rusak Ringan</span>, atau <span class="badge badge-red">Rusak Berat</span></td>
+        </tr>
+        <tr>
+            <td><strong>Lokasi</strong></td>
+            <td>Lokasi penempatan aset saat ini</td>
+        </tr>
+        <tr>
+            <td><strong>Penanggung Jawab</strong></td>
+            <td>Pegawai yang bertanggung jawab atas aset</td>
+        </tr>
+    </table>
+
+    <h2 id="bab6-2">6.2 Tambah Aset Baru</h2>
+    <p>Untuk menambahkan aset baru (hanya <strong>Staf Keuangan</strong>):</p>
+
+    <ol class="steps">
+        <li>Klik tombol <strong>"+ Tambah Aset"</strong> di halaman Daftar Aset.</li>
+        <li>Isi formulir data aset dengan lengkap (lihat gambar di bawah).</li>
+        <li>Upload <strong>Foto Aset</strong> jika tersedia (format: JPG/PNG, maks 5 MB).</li>
+        <li>Klik tombol <strong>"Simpan"</strong>.</li>
+        <li>Sistem akan otomatis:
+            <ul style="margin-top: 4px; margin-left: 16px;">
+                <li>Membuat <strong>QR Code</strong> untuk aset tersebut</li>
+                <li>Menentukan jenis dokumen (<strong>KIB</strong> untuk aset tetap, <strong>KIR</strong> untuk barang persediaan)</li>
+            </ul>
+        </li>
+    </ol>
+
+    <div class="screenshot-container">
+        <img src="images/aset_form_create.png" alt="Form Tambah Aset">
+        <div class="screenshot-caption">Gambar 6.2 — Formulir Tambah Aset Baru</div>
+    </div>
+
+    <h3>Data yang Perlu Diisi:</h3>
+    <table>
+        <tr>
+            <th>Field</th>
+            <th>Wajib</th>
+            <th>Keterangan</th>
+        </tr>
+        <tr><td>Kode Barang</td><td>✅</td><td>Format: XX.XX/XXXX/YYYY (contoh: 02.06/0012/2024)</td></tr>
+        <tr><td>Nama Barang</td><td>✅</td><td>Nama deskriptif aset</td></tr>
+        <tr><td>Tahun Perolehan</td><td>✅</td><td>Tahun kapan aset diperoleh</td></tr>
+        <tr><td>Nilai Perolehan</td><td>✅</td><td>Harga perolehan (Rupiah)</td></tr>
+        <tr><td>Kondisi</td><td>✅</td><td>Baik / Rusak Ringan / Rusak Berat</td></tr>
+        <tr><td>Lokasi</td><td>✅</td><td>Lokasi penempatan fisik aset</td></tr>
+        <tr><td>Penanggung Jawab</td><td>✅</td><td>Pilih pegawai yang bertanggung jawab</td></tr>
+        <tr><td>Cara Perolehan</td><td>✅</td><td>Pembelian / Hibah / Sumbangan / Produksi Sendiri / Lainnya</td></tr>
+        <tr><td>Merk/Tipe</td><td>—</td><td>Merk atau tipe barang (opsional)</td></tr>
+        <tr><td>Nomor Register</td><td>—</td><td>Nomor inventaris (opsional)</td></tr>
+        <tr><td>Ukuran</td><td>—</td><td>Dimensi fisik (opsional)</td></tr>
+        <tr><td>Bahan</td><td>—</td><td>Material/bahan (opsional)</td></tr>
+        <tr><td>Foto</td><td>—</td><td>Upload foto aset (opsional)</td></tr>
+    </table>
+
+    <h2 id="bab6-3">6.3 Detail Aset</h2>
+    <p>
+        Halaman detail aset menampilkan seluruh informasi lengkap tentang satu aset, termasuk foto, 
+        QR Code, dokumen KIB/KIR, dan riwayat perubahan kondisi/lokasi.
+    </p>
+
+    <div class="screenshot-container">
+        <img src="images/aset_detail.png" alt="Detail Aset">
+        <div class="screenshot-caption">Gambar 6.3 — Halaman Detail Aset</div>
+    </div>
+
+    <h2 id="bab6-4">6.4 QR Code & KIB/KIR</h2>
+    <p>Setiap aset memiliki QR Code yang bisa diunduh dan dicetak untuk ditempel pada aset fisik.</p>
+
+    <h3>Cara Mengunduh QR Code:</h3>
+    <ol class="steps">
+        <li>Buka halaman <strong>Detail Aset</strong> atau pada daftar aset klik ikon <strong>QR</strong>.</li>
+        <li>Klik tombol <strong>"Download QR Code"</strong>.</li>
+        <li>File gambar QR Code akan terunduh dan siap dicetak.</li>
+    </ol>
+
+    <h3>Cara Generate Dokumen KIB/KIR:</h3>
+    <ol class="steps">
+        <li>Buka halaman <strong>Detail Aset</strong>.</li>
+        <li>Klik tombol <strong>"Generate KIB/KIR"</strong> (hanya Staf Keuangan).</li>
+        <li>Sistem akan otomatis menentukan jenis dokumen (KIB untuk aset tetap, KIR untuk persediaan).</li>
+        <li>Dokumen PDF akan di-generate dan bisa diunduh.</li>
+    </ol>
+
+    <div class="alert alert-info">
+        <strong>ℹ️ Perbedaan KIB dan KIR:</strong>
+        <ul style="margin: 4px 0 0 16px;">
+            <li><strong>KIB (Kartu Inventaris Barang):</strong> Untuk aset tetap — tanah, bangunan, kendaraan, peralatan mesin</li>
+            <li><strong>KIR (Kartu Inventaris Ruangan):</strong> Untuk barang habis pakai dan persediaan</li>
+        </ul>
+    </div>
+</div>
+
+<!-- ============================================== -->
+<!-- BAB 7: MODUL LAPORAN -->
+<!-- ============================================== -->
+<div class="page-break"></div>
+<div class="section" id="bab7">
+    <h1>BAB 7 — Modul Laporan</h1>
+    <p>
+        Modul Laporan menyediakan rekap data keuangan dalam bentuk tabel dan grafik, serta fitur 
+        export ke format PDF dan Excel. Modul ini dapat diakses oleh Staf Keuangan, Sekmat, dan Camat.
+    </p>
+
+    <h2 id="bab7-1">7.1 Halaman Laporan</h2>
+    <p>Halaman laporan menampilkan ringkasan realisasi anggaran per kegiatan dengan filter tahun anggaran.</p>
+
+    <div class="screenshot-container">
+        <img src="images/laporan.png" alt="Halaman Laporan">
+        <div class="screenshot-caption">Gambar 7.1 — Halaman Laporan Realisasi Anggaran</div>
+    </div>
+
+    <h3>Informasi yang Ditampilkan:</h3>
+    <ul style="margin-left: 20px; margin-bottom: 12px;">
+        <li>Tabel rekapitulasi per kegiatan (nama, pagu, realisasi, sisa, persentase)</li>
+        <li>Total keseluruhan anggaran, realisasi, dan sisa</li>
+        <li>Visualisasi grafik perbandingan pagu vs realisasi</li>
+        <li>Filter berdasarkan tahun anggaran</li>
+    </ul>
+
+    <h2 id="bab7-2">7.2 Export PDF & Excel</h2>
+    <p>Data laporan dapat di-export ke format PDF dan Excel untuk keperluan cetak dan pelaporan.</p>
+
+    <h3>Cara Export Laporan:</h3>
+    <ol class="steps">
+        <li>Buka halaman <strong>Laporan</strong> dari menu sidebar.</li>
+        <li>Pilih <strong>tahun anggaran</strong> yang ingin dilaporkan (jika tersedia filter).</li>
+        <li>Untuk export PDF, klik tombol <strong>"Export PDF"</strong> — dokumen PDF akan langsung terunduh.</li>
+        <li>Untuk export Excel, klik tombol <strong>"Export Excel"</strong> — file XLSX akan langsung terunduh.</li>
+    </ol>
+
+    <div class="alert alert-info">
+        <strong>ℹ️ Catatan:</strong>
+        File export berisi data realisasi per kegiatan, termasuk total keseluruhan. Format PDF cocok untuk pelaporan formal, 
+        sedangkan Excel cocok untuk analisis data lebih lanjut.
+    </div>
+</div>
+
+<!-- ============================================== -->
+<!-- BAB 8: NOTIFIKASI -->
+<!-- ============================================== -->
+<div class="page-break"></div>
+<div class="section" id="bab8">
+    <h1>BAB 8 — Notifikasi</h1>
+    <p>
+        Sistem notifikasi SIKEMAS memberikan pemberitahuan kepada pengguna secara otomatis 
+        setiap kali terjadi aksi penting yang relevan dengan peran mereka.
+    </p>
+
+    <h2 id="bab8-1">8.1 Pusat Notifikasi</h2>
+    <p>Notifikasi dapat diakses melalui dua cara:</p>
+    <ul style="margin-left: 20px; margin-bottom: 12px;">
+        <li><strong>Ikon Lonceng (Bell) di Topbar:</strong> Klik ikon lonceng di pojok kanan atas untuk melihat 10 notifikasi terbaru secara cepat. Angka badge menunjukkan jumlah notifikasi yang belum dibaca.</li>
+        <li><strong>Halaman Pusat Notifikasi:</strong> Klik "Lihat Semua" atau menu sidebar untuk melihat seluruh riwayat notifikasi.</li>
+    </ul>
+
+    <div class="screenshot-container">
+        <img src="images/notifikasi.png" alt="Halaman Notifikasi">
+        <div class="screenshot-caption">Gambar 8.1 — Halaman Pusat Notifikasi</div>
+    </div>
+
+    <h3>Cara Mengelola Notifikasi:</h3>
+    <ol class="steps">
+        <li><strong>Membaca notifikasi:</strong> Klik pada baris notifikasi — Anda akan diarahkan ke halaman terkait dan notifikasi otomatis ditandai "dibaca".</li>
+        <li><strong>Tandai semua dibaca:</strong> Klik tombol <strong>"Tandai Semua Dibaca"</strong> untuk menghapus badge notifikasi.</li>
+    </ol>
+
+    <h2 id="bab8-2">8.2 Jenis Notifikasi</h2>
+    <p>Sistem mengirim notifikasi secara otomatis untuk event-event berikut:</p>
+    <table>
+        <tr>
+            <th>Event</th>
+            <th>Penerima</th>
+            <th>Tipe</th>
+        </tr>
+        <tr>
+            <td>Kasi submit pengajuan SPJ baru</td>
+            <td>Staf Keuangan</td>
+            <td><span class="badge badge-blue">action</span></td>
+        </tr>
+        <tr>
+            <td>Staf Keuangan ajukan SPJ ke Sekmat</td>
+            <td>Sekmat</td>
+            <td><span class="badge badge-blue">action</span></td>
+        </tr>
+        <tr>
+            <td>Sekmat verifikasi (approve) SPJ</td>
+            <td>Kasi + Staf Keuangan</td>
+            <td><span class="badge badge-green">info</span></td>
+        </tr>
+        <tr>
+            <td>Sekmat tolak SPJ</td>
+            <td>Staf Keuangan</td>
+            <td><span class="badge badge-amber">warning</span></td>
+        </tr>
+        <tr>
+            <td>Aset baru ditambahkan</td>
+            <td>Staf Umum</td>
+            <td><span class="badge badge-green">info</span></td>
+        </tr>
+        <tr>
+            <td>Realisasi melebihi 80% pagu</td>
+            <td>Staf Keuangan + Sekmat</td>
+            <td><span class="badge badge-amber">warning</span></td>
+        </tr>
+        <tr>
+            <td>Verifikasi fisik aset overdue (>90 hari)</td>
+            <td>Staf Umum</td>
+            <td><span class="badge badge-amber">warning</span></td>
+        </tr>
+    </table>
+</div>
+
+<!-- ============================================== -->
+<!-- BAB 9: PROFIL PENGGUNA -->
+<!-- ============================================== -->
+<div class="page-break"></div>
+<div class="section" id="bab9">
+    <h1>BAB 9 — Profil Pengguna</h1>
+    <p>Setiap pengguna SIKEMAS dapat mengelola data profil dan mengubah password melalui halaman profil.</p>
+
+    <h2 id="bab9-1">9.1 Edit Profil</h2>
+    <p>Untuk mengubah data profil:</p>
+    <ol class="steps">
+        <li>Klik nama pengguna di pojok kanan atas (Topbar), kemudian pilih <strong>"Profil"</strong>.</li>
+        <li>Halaman profil akan menampilkan informasi akun Anda.</li>
+        <li>Ubah data yang ingin diperbarui (Nama, Email).</li>
+        <li>Klik tombol <strong>"Simpan"</strong> untuk menyimpan perubahan.</li>
+    </ol>
+
+    <div class="screenshot-container">
+        <img src="images/profile.png" alt="Halaman Profil">
+        <div class="screenshot-caption">Gambar 9.1 — Halaman Edit Profil Pengguna</div>
+    </div>
+
+    <h2 id="bab9-2">9.2 Ubah Password</h2>
+    <p>Untuk mengubah password:</p>
+    <ol class="steps">
+        <li>Pada halaman Profil, scroll ke bagian <strong>"Ubah Password"</strong>.</li>
+        <li>Masukkan <strong>Password Lama</strong> (password saat ini).</li>
+        <li>Masukkan <strong>Password Baru</strong>.</li>
+        <li>Masukkan lagi <strong>Konfirmasi Password Baru</strong>.</li>
+        <li>Klik tombol <strong>"Ubah Password"</strong>.</li>
+    </ol>
+
+    <div class="alert alert-warning">
+        <strong>⚠️ Tips Keamanan Password:</strong>
+        <ul style="margin: 4px 0 0 16px;">
+            <li>Gunakan password minimal 8 karakter</li>
+            <li>Kombinasikan huruf besar, huruf kecil, angka, dan simbol</li>
+            <li>Jangan gunakan password yang sama dengan akun lain</li>
+            <li>Ganti password secara berkala (minimal 3 bulan sekali)</li>
+        </ul>
+    </div>
+</div>
+
+<!-- ============================================== -->
+<!-- BAB 10: LAMPIRAN -->
+<!-- ============================================== -->
+<div class="page-break"></div>
+<div class="section" id="bab10">
+    <h1>BAB 10 — Lampiran</h1>
+
+    <h2>10.1 Daftar Akun Pengguna Default</h2>
+    <p>Berikut adalah daftar akun pengguna yang telah disediakan secara default oleh sistem. Password default untuk semua akun adalah: <code>password</code></p>
+
+    <div class="alert alert-danger">
+        <strong>🔒 PENTING:</strong>
+        Segera ganti password default setelah login pertama kali! Password default hanya digunakan untuk tahap awal dan <strong>tidak aman</strong> untuk penggunaan produksi.
+    </div>
+
+    <table>
+        <tr>
+            <th>No</th>
+            <th>Nama</th>
+            <th>Email</th>
+            <th>Peran (Role)</th>
+            <th>Seksi</th>
+        </tr>
+        <tr>
+            <td>1</td>
+            <td>Admin Umum</td>
+            <td><code>umum@sikemas.test</code></td>
+            <td>Staf Kasubag Umum</td>
+            <td>—</td>
+        </tr>
+        <tr>
+            <td>2</td>
+            <td>Admin Keuangan</td>
+            <td><code>keuangan@sikemas.test</code></td>
+            <td>Staf Keuangan</td>
+            <td>—</td>
+        </tr>
+        <tr>
+            <td>3</td>
+            <td>Kasubag Keuangan</td>
+            <td><code>kasubag.keuangan@sikemas.test</code></td>
+            <td>Staf Keuangan</td>
+            <td>—</td>
+        </tr>
+        <tr>
+            <td>4</td>
+            <td>Kasi Pemerintahan</td>
+            <td><code>kasi.pem@sikemas.test</code></td>
+            <td>Kasi</td>
+            <td>Pemerintahan</td>
+        </tr>
+        <tr>
+            <td>5</td>
+            <td>Kasi Trantib</td>
+            <td><code>kasi.trantib@sikemas.test</code></td>
+            <td>Kasi</td>
+            <td>Ketentraman &amp; Ketertiban</td>
+        </tr>
+        <tr>
+            <td>6</td>
+            <td>Kasi PMD</td>
+            <td><code>kasi.pmd@sikemas.test</code></td>
+            <td>Kasi</td>
+            <td>Pemberdayaan Masyarakat Desa</td>
+        </tr>
+        <tr>
+            <td>7</td>
+            <td>Kasi Kesra</td>
+            <td><code>kasi.kesra@sikemas.test</code></td>
+            <td>Kasi</td>
+            <td>Kesejahteraan Rakyat</td>
+        </tr>
+        <tr>
+            <td>8</td>
+            <td>Kasi Pelayanan</td>
+            <td><code>kasi.pelayanan@sikemas.test</code></td>
+            <td>Kasi</td>
+            <td>Pelayanan Umum</td>
+        </tr>
+        <tr>
+            <td>9</td>
+            <td>Sekretaris Kecamatan</td>
+            <td><code>sekmat@sikemas.test</code></td>
+            <td>Sekmat</td>
+            <td>—</td>
+        </tr>
+        <tr>
+            <td>10</td>
+            <td>Camat Caringin</td>
+            <td><code>camat@sikemas.test</code></td>
+            <td>Camat</td>
+            <td>—</td>
+        </tr>
+    </table>
+
+    <h2>10.2 Matriks Hak Akses per Role</h2>
+    <table>
+        <tr>
+            <th>Fitur</th>
+            <th>Staf Umum</th>
+            <th>Staf Keuangan</th>
+            <th>Kasi</th>
+            <th>Sekmat</th>
+            <th>Camat</th>
+        </tr>
+        <tr>
+            <td>Dashboard</td>
+            <td>—</td>
+            <td>✅ Operasional</td>
+            <td>✅ Kasi</td>
+            <td>✅ Monitoring</td>
+            <td>✅ Eksekutif</td>
+        </tr>
+        <tr>
+            <td>SPJ — Ajukan</td>
+            <td>—</td>
+            <td>—</td>
+            <td>✅</td>
+            <td>—</td>
+            <td>—</td>
+        </tr>
+        <tr>
+            <td>SPJ — Konsolidasi</td>
+            <td>—</td>
+            <td>✅</td>
+            <td>—</td>
+            <td>—</td>
+            <td>—</td>
+        </tr>
+        <tr>
+            <td>SPJ — Verifikasi</td>
+            <td>—</td>
+            <td>—</td>
+            <td>—</td>
+            <td>✅</td>
+            <td>—</td>
+        </tr>
+        <tr>
+            <td>SPJ — Lihat Arsip</td>
+            <td>—</td>
+            <td>✅ Semua</td>
+            <td>✅ Miliknya</td>
+            <td>✅ Semua</td>
+            <td>—</td>
+        </tr>
+        <tr>
+            <td>Kegiatan — Kelola</td>
+            <td>—</td>
+            <td>✅ CRUD</td>
+            <td>—</td>
+            <td>✅ View</td>
+            <td>—</td>
+        </tr>
+        <tr>
+            <td>Aset — Tambah</td>
+            <td>—</td>
+            <td>✅</td>
+            <td>—</td>
+            <td>—</td>
+            <td>—</td>
+        </tr>
+        <tr>
+            <td>Aset — Update Kondisi</td>
+            <td>✅</td>
+            <td>✅</td>
+            <td>—</td>
+            <td>—</td>
+            <td>—</td>
+        </tr>
+        <tr>
+            <td>Aset — Lihat</td>
+            <td>✅</td>
+            <td>✅</td>
+            <td>—</td>
+            <td>✅</td>
+            <td>—</td>
+        </tr>
+        <tr>
+            <td>Aset — Generate QR</td>
+            <td>✅</td>
+            <td>✅</td>
+            <td>—</td>
+            <td>—</td>
+            <td>—</td>
+        </tr>
+        <tr>
+            <td>Aset — Generate KIB/KIR</td>
+            <td>—</td>
+            <td>✅</td>
+            <td>—</td>
+            <td>—</td>
+            <td>—</td>
+        </tr>
+        <tr>
+            <td>Laporan — Lihat</td>
+            <td>—</td>
+            <td>✅</td>
+            <td>—</td>
+            <td>✅</td>
+            <td>✅</td>
+        </tr>
+        <tr>
+            <td>Laporan — Export PDF/Excel</td>
+            <td>—</td>
+            <td>✅</td>
+            <td>—</td>
+            <td>✅</td>
+            <td>—</td>
+        </tr>
+        <tr>
+            <td>Notifikasi</td>
+            <td>✅</td>
+            <td>✅</td>
+            <td>✅</td>
+            <td>✅</td>
+            <td>✅</td>
+        </tr>
+        <tr>
+            <td>Profil</td>
+            <td>✅</td>
+            <td>✅</td>
+            <td>✅</td>
+            <td>✅</td>
+            <td>✅</td>
+        </tr>
+    </table>
+
+    <h2>10.3 Daftar Seksi Kecamatan</h2>
+    <table>
+        <tr>
+            <th>No</th>
+            <th>Kode</th>
+            <th>Nama Seksi</th>
+        </tr>
+        <tr><td>1</td><td><code>pemerintahan</code></td><td>Pemerintahan</td></tr>
+        <tr><td>2</td><td><code>trantib</code></td><td>Ketentraman &amp; Ketertiban</td></tr>
+        <tr><td>3</td><td><code>pmd</code></td><td>Pemberdayaan Masyarakat Desa</td></tr>
+        <tr><td>4</td><td><code>kesra</code></td><td>Kesejahteraan Rakyat</td></tr>
+        <tr><td>5</td><td><code>pelayanan</code></td><td>Pelayanan Umum</td></tr>
+    </table>
+
+    <h2>10.4 Format Data Standar</h2>
+    <table>
+        <tr>
+            <th>Data</th>
+            <th>Format</th>
+            <th>Contoh</th>
+        </tr>
+        <tr>
+            <td>Nominal Rupiah</td>
+            <td><code>Rp XX.XXX.XXX,XX</code></td>
+            <td>Rp 15.750.000,00</td>
+        </tr>
+        <tr>
+            <td>Tanggal</td>
+            <td><code>DD MMMM YYYY</code></td>
+            <td>27 September 2026</td>
+        </tr>
+        <tr>
+            <td>Nomor SPJ</td>
+            <td><code>SPJ/SEKSI/BULAN_ROMAWI/TAHUN/URUT</code></td>
+            <td>SPJ/PEMERINTAHAN/IX/2026/001</td>
+        </tr>
+        <tr>
+            <td>Kode Barang Aset</td>
+            <td><code>GOL.SUB/URUT/TAHUN</code></td>
+            <td>02.06/0012/2024</td>
+        </tr>
+    </table>
+
+    <h2>10.5 Troubleshooting (Penanganan Masalah)</h2>
+    <table>
+        <tr>
+            <th>Masalah</th>
+            <th>Penyebab</th>
+            <th>Solusi</th>
+        </tr>
+        <tr>
+            <td>Tidak bisa login</td>
+            <td>Email/password salah, atau akun dinonaktifkan</td>
+            <td>Periksa email dan password. Jika tetap gagal, hubungi Administrator.</td>
+        </tr>
+        <tr>
+            <td>Akun terkunci</td>
+            <td>Terlalu banyak percobaan login (5x gagal)</td>
+            <td>Tunggu 1 menit, kemudian coba lagi dengan password yang benar.</td>
+        </tr>
+        <tr>
+            <td>Tidak bisa ajukan SPJ</td>
+            <td>Sisa pagu tidak cukup, atau ada SPJ ditolak yang belum ditindaklanjuti</td>
+            <td>Periksa sisa pagu kegiatan. Selesaikan SPJ yang berstatus "Ditolak" terlebih dahulu.</td>
+        </tr>
+        <tr>
+            <td>File bukti gagal upload</td>
+            <td>Ukuran file melebihi 5 MB, atau format tidak didukung</td>
+            <td>Kompres file atau konversi ke format JPG/PNG/PDF dengan ukuran < 5 MB.</td>
+        </tr>
+        <tr>
+            <td>Menu tidak muncul</td>
+            <td>Role pengguna tidak memiliki hak akses ke menu tersebut</td>
+            <td>Menu ditampilkan sesuai peran. Hubungi Administrator jika ada kekeliruan role.</td>
+        </tr>
+        <tr>
+            <td>Halaman error 403</td>
+            <td>Mencoba mengakses halaman yang tidak diizinkan</td>
+            <td>Gunakan menu sidebar untuk navigasi. Jangan mengubah URL secara manual.</td>
+        </tr>
+        <tr>
+            <td>Data tidak ter-update</td>
+            <td>Cache browser</td>
+            <td>Tekan Ctrl+Shift+R untuk hard refresh halaman.</td>
+        </tr>
+    </table>
+</div>
+
+<!-- ============================================== -->
+<!-- FOOTER -->
+<!-- ============================================== -->
+<div class="doc-footer">
+    <p><strong>Manual Book SIKEMAS</strong> — Sistem Informasi Keuangan dan Aset Terintegrasi</p>
+    <p>Kecamatan Caringin — Kabupaten Garut</p>
+    <p>Versi 1.0 — September 2026</p>
+    <p style="margin-top: 12px; font-size: 8pt;">
+        Dokumen ini bersifat internal dan hanya untuk keperluan Kecamatan Caringin.<br>
+        Dilarang menyebarluaskan tanpa izin tertulis dari pihak berwenang.
+    </p>
+</div>
+
+</body>
+</html>
+

@@ -97,7 +97,7 @@ Memastikan seluruh alur bisnis, tata kelola hak akses (Role-Based Access Control
 |---|---|---|:---:|
 | **UAT-CAM-01** | Login dengan akun Camat (`camat@sikemas.test`) | Masuk ke `Dashboard/CamatDashboard` (tampilan khusus eksekutif pimpinan). | ✅ PASS |
 | **UAT-CAM-02** | Memeriksa progress bar serapan anggaran kecamatan | Menampilkan akumulasi pagu APBD, total realisasi terserap, sisa anggaran, dan persentase serapan. | ✅ PASS |
-| **UAT-CAM-03** | Memeriksa visualisasi Recharts perbandingan serapan antar 5 Seksi | Menampilkan diagram perbandingan performa penyerapan antara Seksi Pem, Trantib, PMD, Kessos, dan Pelayanan. | ✅ PASS |
+| **UAT-CAM-03** | Memeriksa visualisasi Recharts perbandingan serapan antar 5 Seksi | Menampilkan diagram perbandingan performa penyerapan antara Seksi Pem, Trantib, PMD, Kesra, dan Pelayanan. | ✅ PASS |
 | **UAT-CAM-04** | Memeriksa grafik lingkaran distribusi kondisi aset BMD | Menampilkan grafik proporsi aset kondisi Baik, Rusak Ringan, dan Rusak Berat. | ✅ PASS |
 | **UAT-CAM-05** | Menguji keamanan read-only: mencoba membuat/mengubah SPJ atau aset | Akses ditolak oleh Policy (HTTP 403 Forbidden), memastikan pimpinan tidak merangkap pelaksana teknis. | ✅ PASS |
 | **UAT-CAM-06** | Mengakses modul Laporan Eksekutif | Camat dapat memantau dan mengunduh rekapitulasi resmi semesteran/tahunan. | ✅ PASS |

@@ -15,7 +15,7 @@ Checklist ini wajib diikuti oleh Subbagian Umum & Kepegawaian serta Subbagian Ke
 | **NIP (18 Digit)** | ................................................................ |
 | **Pangkat / Golongan** | ................................................................ |
 | **Jabatan Dinas** | ................................................................ |
-| **Unit Kerja / Seksi** | [ ] Pemerintahan [ ] Trantib [ ] PMD [ ] Kessos [ ] Pelayanan [ ] Sekretariat |
+| **Unit Kerja / Seksi** | [ ] Pemerintahan [ ] Trantib [ ] PMD [ ] Kesra [ ] Pelayanan [ ] Sekretariat |
 | **Role SIKEMAS** | [ ] Kasi [ ] Staf Keuangan [ ] Sekmat [ ] Staf Umum [ ] Camat |
 | **Tanggal Efektif Bertugas**| ..... / ..... / 2026 |
 
@@ -33,7 +33,7 @@ Dilakukan oleh Administrator Sistem (Staf Umum / Keuangan):
   - Set status `is_active = true`.
 - [ ] **3. Penetapan Role & Seksi (RBAC)**:
   - Berikan peran (*Role*) yang sesuai: `kasi`, `staf_keuangan`, `sekmat`, `staf_umum`, atau `camat`.
-  - Jika role adalah **Kasi**, wajib tetapkan atribut `seksi`: `pemerintahan`, `trantib`, `pmd`, `kessos`, atau `pelayanan`.
+  - Jika role adalah **Kasi**, wajib tetapkan atribut `seksi`: `pemerintahan`, `trantib`, `pmd`, `kesra`, atau `pelayanan`.
 - [ ] **4. Penyerahan Kredensial Awal**:
   - Password default acak yang aman diserahkan secara tertutup kepada pegawai yang bersangkutan.
   - Berikan tautan resmi aplikasi: `https://sikemas.caringin.go.id`.

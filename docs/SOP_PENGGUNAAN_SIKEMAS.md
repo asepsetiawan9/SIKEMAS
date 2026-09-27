@@ -23,7 +23,7 @@ Dokumen ini disusun sebagai panduan operasional baku bagi seluruh aparatur di li
 Menjamin setiap realisasi belanja kegiatan Seksi didukung dengan berkas pertanggungjawaban yang valid, tidak melebihi sisa pagu anggaran, dan terverifikasi secara berjenjang.
 
 ### 2. Penanggung Jawab
-- **Pelaksana:** Kepala Seksi (Pemerintahan, Trantib, PMD, Kessos, Pelayanan).
+- **Pelaksana:** Kepala Seksi (Pemerintahan, Trantib, PMD, Kesra, Pelayanan).
 - **Pengawas:** Sekretaris Kecamatan & Staf Keuangan.
 
 ### 3. Ketentuan & Batasan Bisnis

@@ -46,6 +46,15 @@ class UserSeeder extends Seeder
                 'no_hp' => '081234567802',
             ],
             [
+                'name' => 'Kasubag Keuangan',
+                'email' => 'kasubag.keuangan@sikemas.test',
+                'role' => UserRole::STAF_KEUANGAN,
+                'seksi' => null,
+                'nip' => '198402122008011002',
+                'jabatan' => 'Kasubag Perencanaan dan Keuangan',
+                'no_hp' => '081234567810',
+            ],
+            [
                 'name' => 'Kasi Pemerintahan',
                 'email' => 'kasi.pem@sikemas.test',
                 'role' => UserRole::KASI,

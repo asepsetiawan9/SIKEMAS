@@ -85,7 +85,11 @@ class RolePermissionSeeder extends Seeder
             ],
             UserRole::CAMAT->value => [
                 'kegiatan.view',
+                'spj.view-all',
+                'spj.verifikasi',
+                'aset.view',
                 'laporan.view',
+                'laporan.export',
                 'dashboard.eksekutif',
             ],
         ];

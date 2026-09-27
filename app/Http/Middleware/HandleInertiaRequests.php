@@ -62,7 +62,7 @@ class HandleInertiaRequests extends Middleware
                 'spj_pending_konsolidasi' => in_array($user->role instanceof UserRole ? $user->role->value : (string) $user->role, [UserRole::STAF_KEUANGAN->value, UserRole::SUPER_ADMIN->value], true)
                     ? Spj::where('status', SpjStatus::DIAJUKAN_KASI)->count()
                     : 0,
-                'spj_pending_verifikasi' => in_array($user->role instanceof UserRole ? $user->role->value : (string) $user->role, [UserRole::SEKMAT->value, UserRole::SUPER_ADMIN->value], true)
+                'spj_pending_verifikasi' => in_array($user->role instanceof UserRole ? $user->role->value : (string) $user->role, [UserRole::SEKMAT->value, UserRole::CAMAT->value, UserRole::SUPER_ADMIN->value], true)
                     ? Spj::where('status', SpjStatus::DIAJUKAN_VERIFIKASI)->count()
                     : 0,
                 'spj_ditolak_kasi' => in_array($user->role instanceof UserRole ? $user->role->value : (string) $user->role, [UserRole::KASI->value], true)

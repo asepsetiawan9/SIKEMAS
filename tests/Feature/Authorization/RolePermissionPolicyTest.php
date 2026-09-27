@@ -139,7 +139,7 @@ class RolePermissionPolicyTest extends TestCase
         $this->assertFalse($keuangan->can('delete', $aset));
     }
 
-    public function test_camat_can_access_dashboard_and_reports_only(): void
+    public function test_camat_can_view_all_menus_and_verify_but_cannot_create_spj_or_aset(): void
     {
         $camat = User::factory()->create([
             'role' => UserRole::CAMAT,
@@ -147,9 +147,12 @@ class RolePermissionPolicyTest extends TestCase
         ]);
         $camat->assignRole(UserRole::CAMAT->value);
 
-        // Camat can view dashboard & reports
+        // Camat can view dashboard, reports, kegiatan, spj, and aset
         $this->actingAs($camat)->get(route('dashboard'))->assertStatus(200);
         $this->actingAs($camat)->get(route('laporan.index'))->assertStatus(200);
+        $this->actingAs($camat)->get(route('kegiatan.index'))->assertStatus(200);
+        $this->actingAs($camat)->get(route('spj.index'))->assertStatus(200);
+        $this->actingAs($camat)->get(route('aset.index'))->assertStatus(200);
 
         // Camat CANNOT create SPJ or create asset -> 403 Forbidden
         $this->actingAs($camat)->get(route('spj.create'))->assertStatus(403);

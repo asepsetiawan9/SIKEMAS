@@ -6,6 +6,10 @@
 
         <title inertia>{{ config('app.name', 'SIKEMAS - Kecamatan Caringin') }}</title>
 
+        <!-- Favicon -->
+        <link rel="icon" type="image/png" href="{{ asset('logo.png') }}">
+        <link rel="apple-touch-icon" href="{{ asset('logo.png') }}">
+
         <!-- Fonts: Inter -->
         <link rel="preconnect" href="https://fonts.googleapis.com">
         <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>

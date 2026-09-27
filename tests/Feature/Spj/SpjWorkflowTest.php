@@ -426,4 +426,30 @@ class SpjWorkflowTest extends TestCase
             'aksi' => 'revisi_bukti',
         ]);
     }
+
+    public function test_preview_bukti_and_stream_storage_file(): void
+    {
+        Storage::fake('public');
+        $file = UploadedFile::fake()->image('bukti_nota.jpg');
+        $storedPath = $file->storeAs('bukti_spj', 'bukti_nota.jpg', 'public');
+
+        $spj = Spj::create([
+            'kegiatan_id' => $this->kegiatan->id,
+            'nominal' => 2500000,
+            'status' => SpjStatus::DIAJUKAN_KASI,
+            'file_bukti' => $storedPath,
+            'tanggal_pengajuan' => now(),
+            'periode_bulan' => 9,
+            'periode_tahun' => 2026,
+            'diajukan_oleh' => $this->kasi->id,
+        ]);
+
+        // 1. Kasi can preview own SPJ bukti
+        $response = $this->actingAs($this->kasi)->get(route('spj.bukti', $spj));
+        $response->assertStatus(200);
+
+        // 2. Fallback direct storage stream works
+        $streamResponse = $this->get('/storage/bukti_spj/bukti_nota.jpg');
+        $streamResponse->assertStatus(200);
+    }
 }

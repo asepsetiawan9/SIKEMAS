@@ -5,8 +5,10 @@ export default function GuestLayout({ children }) {
     return (
         <div className="flex min-h-screen flex-col items-center justify-center bg-gradient-to-br from-neutral-100 via-slate-50 to-primary-light/30 px-4 py-8">
             <div className="mb-6 flex flex-col items-center text-center">
-                <Link href="/" className="flex items-center gap-3">
-                    <ApplicationLogo className="h-14 w-14" iconClassName="w-8 h-8" />
+                <Link href="/" className="flex items-center gap-3 group">
+                    <div className="w-16 h-16 p-2.5 rounded-2xl bg-white shadow-md border border-neutral-200/80 flex items-center justify-center group-hover:scale-105 transition-transform">
+                        <ApplicationLogo className="w-full h-full" />
+                    </div>
                 </Link>
                 <h1 className="mt-3 text-2xl font-black tracking-wider text-neutral-900">
                     SIKEMAS

@@ -1,10 +1,13 @@
 import React from 'react';
-import { Building2 } from 'lucide-react';
 
-export default function ApplicationLogo({ className = 'w-10 h-10', iconClassName = 'w-6 h-6' }) {
+export default function ApplicationLogo({ className = 'w-10 h-10', imgClassName = 'w-full h-full' }) {
     return (
-        <div className={`rounded-2xl bg-gradient-to-tr from-primary to-primary-light flex items-center justify-center text-white shadow-md border border-primary/20 ${className}`}>
-            <Building2 className={`text-white ${iconClassName}`} />
+        <div className={`flex items-center justify-center shrink-0 overflow-hidden ${className}`}>
+            <img
+                src="/logo.png"
+                alt="Logo SIKEMAS Kecamatan Caringin"
+                className={`object-contain max-h-full max-w-full drop-shadow-sm ${imgClassName}`}
+            />
         </div>
     );
 }

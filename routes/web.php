@@ -31,11 +31,18 @@ Route::middleware(['auth'])->group(function () {
         Route::get('/create', [SpjController::class, 'create'])->name('create');
         Route::post('/', [SpjController::class, 'store'])->name('store');
         Route::get('/{spj}', [SpjController::class, 'show'])->name('show');
+        Route::get('/{spj}/bukti', [SpjController::class, 'previewBukti'])->name('bukti');
         Route::put('/{spj}/konsolidasi', [SpjController::class, 'konsolidasi'])->name('konsolidasi');
         Route::put('/{spj}/ajukan-verifikasi', [SpjController::class, 'ajukanVerifikasi'])->name('ajukan-verifikasi');
         Route::put('/{spj}/verifikasi', [SpjController::class, 'verifikasi'])->name('verifikasi');
         Route::post('/{spj}/revisi-bukti', [SpjController::class, 'revisiBukti'])->name('revisi-bukti');
     });
+
+    // Fallback direct storage stream for uploaded media
+    Route::get('/storage/{folder}/{filename}', [SpjController::class, 'streamStorageFile'])
+        ->where('folder', 'bukti_spj|spj_dokumen|aset_foto')
+        ->where('filename', '.*')
+        ->name('storage.stream');
 
     // === Kegiatan Anggaran ===
     Route::prefix('kegiatan')->name('kegiatan.')->group(function () {

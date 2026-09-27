@@ -43,7 +43,7 @@ export default function Show({ spj, logs = [], sisa_pagu_kegiatan = 0 }) {
     const isSuperAdmin = userRole === 'super_admin';
     const isKasiPengaju = (userRole === 'kasi' && currentUserId === spj.diajukan_oleh) || isSuperAdmin;
     const isStafKeuangan = userRole === 'staf_keuangan' || isSuperAdmin;
-    const isSekmat = userRole === 'sekmat' || isSuperAdmin;
+    const isSekmat = ['sekmat', 'camat'].includes(userRole) || isSuperAdmin;
 
     const handleRevisiSubmit = (e) => {
         e.preventDefault();
@@ -308,10 +308,10 @@ export default function Show({ spj, logs = [], sisa_pagu_kegiatan = 0 }) {
                                     <CheckCircle2 className="w-4 h-4 text-neutral-500 shrink-0 mt-0.5" />
                                     <div>
                                         <span className="text-[10px] text-neutral-400 uppercase tracking-wider block">
-                                            Diverifikasi Oleh (Sekmat)
+                                            Diverifikasi / Disahkan Oleh
                                         </span>
                                         <span className="font-bold text-neutral-900">
-                                            {spj.diverifikasi_oleh?.name || (spj.tanggal_verifikasi ? 'Sekretaris Kecamatan' : '-')}
+                                            {spj.diverifikasi_oleh?.name || (spj.tanggal_verifikasi ? 'Pimpinan Kecamatan' : '-')}
                                         </span>
                                         <span className="text-[11px] text-neutral-500 block">
                                             Tanggal: {formatDate(spj.tanggal_verifikasi)}
@@ -345,7 +345,7 @@ export default function Show({ spj, logs = [], sisa_pagu_kegiatan = 0 }) {
                                 </div>
 
                                 <a
-                                    href={`/storage/${spj.file_bukti}`}
+                                    href={`/spj/${spj.id}/bukti`}
                                     target="_blank"
                                     rel="noopener noreferrer"
                                     className="px-4 py-2 bg-neutral-900 hover:bg-neutral-800 text-white rounded-btn text-xs font-semibold shadow-xs transition-colors inline-flex items-center gap-1.5"

@@ -267,4 +267,34 @@ Format: Atomic Logging `[Timestamp] - [Fase] - [Apa | Kenapa | Dampak]`
 - **Status**: Completed ✅.
 - **Blockers**: Tidak ada.
 
+### [2026-09-27 20:15] - Penambahan Akun Kasubag Keuangan, Hak Akses Camat & Perbaikan Error Bukti SPJ 404
+- **Apa**:
+  1. **Akun Kasubag Keuangan**: Menambahkan akun `Kasubag Keuangan` (`kasubag.keuangan@sikemas.test` / `password`) pada `database/seeders/UserSeeder.php` dengan role `staf_keuangan` dan jabatan `Kasubag Perencanaan dan Keuangan` (tugas dan wewenang identik dengan bendahara).
+  2. **Hak Akses Camat**: Memperbarui `database/seeders/RolePermissionSeeder.php`, `Sidebar.jsx`, `SpjController.php`, dan `Spj/Show.jsx` agar Camat memiliki akses komprehensif ke seluruh menu sistem (Dashboard Eksekutif, Kegiatan Anggaran, SPJ Digital mencakup Arsip, Antrean Verifikasi, dan Monitoring Konsolidasi, Aset BMD mencakup KIB/KIR, dan Laporan Wilayah) serta dapat melakukan pengesahan/persetujuan verifikasi SPJ.
+  3. **Resolusi Error Bukti SPJ 404**:
+     - Mengubah tautan dokumen bukti fisik pada `resources/js/Pages/Spj/Show.jsx` dari direct file path `/storage/${spj.file_bukti}` menjadi dedicated secure endpoint `/spj/${spj.id}/bukti`.
+     - Mengimplementasikan method `previewBukti()` dan fallback `streamStorageFile()` pada `app/Http/Controllers/SpjController.php` dan `routes/web.php` untuk streaming file dokumen dari storage disk secara terproteksi.
+     - Memperbaiki `deployment/nginx.conf` dengan menambahkan modifier `^~` pada blok `location ^~ /storage/` agar request media tidak ter-override oleh regex static asset caching yang menyebabkan 404.
+  4. **Pengujian & Kompilasi**: Menambahkan automated test `test_preview_bukti_and_stream_storage_file()` pada `SpjWorkflowTest` dan memperbarui `RolePermissionPolicyTest`. Seluruh 80 unit & feature test lulus 100% (472 assertions) serta Vite production bundle berhasil dikompilasi (`npm run build`). Perubahan ditahan secara lokal dan belum di-push sesuai instruksi Mr Zeps.
+- **Kenapa**: Memenuhi instruksi Mr Zeps untuk melengkapi akun Kasubag Keuangan, membuka akses menu dan verifikasi bagi Camat, serta menuntaskan kendala 404 saat membuka detail berkas bukti SPJ.
+- **Dampaknya**: Akun Kasubag Keuangan aktif dan siap pakai, Camat memiliki visibilitas dan hak verifikasi penuh di seluruh modul, dan berkas bukti fisik SPJ dapat dibuka dengan aman tanpa risiko 404.
+- **Status**: Completed ✅ (Local Ready, Hold Git Push as Ordered).
+- **Blockers**: Tidak ada.
+
+### [2026-09-27 20:20] - Penyeragaman Seluruh Logo Aplikasi dengan Logo Resmi Kecamatan Caringin
+- **Apa**:
+  1. Memperbarui `resources/js/Components/ApplicationLogo.jsx` agar merender logo resmi `/logo.png` (`public/logo.png`) dengan styling `object-contain` yang presisi.
+  2. Memperbarui `resources/js/Components/Sidebar.jsx` pada bagian brand header agar menggunakan logo `/logo.png`.
+  3. Memperbarui `resources/js/Layouts/GuestLayout.jsx` (halaman Login, Reset Password, dll.) dengan container card putih berbayang halus untuk menampilkan `/logo.png`.
+  4. Memperbarui `resources/js/Pages/Welcome.jsx` untuk mengganti ikon SVG default Laravel dengan `/logo.png`.
+  5. Memperbarui `resources/views/app.blade.php` dengan tag `link rel="icon"` dan `apple-touch-icon` yang mengarah ke `{{ asset('logo.png') }}`.
+  6. Melakukan build ulang assets Vite dengan `npm run build` (sukses tanpa error).
+  7. Menjalankan verifikasi regression test suite via `php artisan test` (80 tests, 472 assertions lulus 100%).
+- **Kenapa**: Memenuhi permintaan Mr Zeps untuk mengubah semua logo di aplikasi menjadi menggunakan berkas `pkp-caringin/public/logo.png`.
+- **Dampaknya**: Seluruh antarmuka publik, otentikasi (login), dashboard internal, sidebar navigasi, dan favicon browser kini secara konsisten dan elegan menampilkan logo resmi Kecamatan Caringin.
+- **Status**: Completed ✅ (Local Ready, Menunggu instruksi Mr Zeps sebelum git push/deploy).
+- **Blockers**: Tidak ada.
+
+
+
 

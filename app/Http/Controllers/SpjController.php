@@ -58,8 +58,8 @@ class SpjController extends Controller
         // Available kegiatan for filter dropdown
         $kegiatanList = Kegiatan::select('id', 'nama', 'pagu')->get();
 
-        // If tab is 'arsip', role is camat, or role is super_admin (not requesting specific tab)
-        if ($tab === 'arsip' || $userRole === UserRole::CAMAT->value || ($userRole === UserRole::SUPER_ADMIN->value && ! in_array($tab, ['verifikasi', 'konsolidasi'], true))) {
+        // If tab is 'arsip', role is camat (when tab is default/arsip), or role is super_admin (not requesting specific tab)
+        if ($tab === 'arsip' || ($userRole === UserRole::CAMAT->value && ! in_array($tab, ['verifikasi', 'konsolidasi'], true)) || ($userRole === UserRole::SUPER_ADMIN->value && ! in_array($tab, ['verifikasi', 'konsolidasi'], true))) {
             $spjs = $this->spjService->getList(15, $filters);
 
             return Inertia::render('Spj/Arsip', [
@@ -70,8 +70,8 @@ class SpjController extends Controller
             ]);
         }
 
-        // Sekmat or Super Admin with tab=verifikasi: Antrean Verifikasi (Spj/VerifikasiIndex)
-        if ($userRole === UserRole::SEKMAT->value || ($userRole === UserRole::SUPER_ADMIN->value && $tab === 'verifikasi')) {
+        // Sekmat, Camat, or Super Admin with tab=verifikasi: Antrean Verifikasi (Spj/VerifikasiIndex)
+        if ($userRole === UserRole::SEKMAT->value || (($userRole === UserRole::CAMAT->value || $userRole === UserRole::SUPER_ADMIN->value) && $tab === 'verifikasi')) {
             $antrean = Spj::with(['kegiatan.kasi', 'diajukanOleh', 'dikonsolidasiOleh'])
                 ->where('status', SpjStatus::DIAJUKAN_VERIFIKASI)
                 ->oldest('tanggal_konsolidasi')
@@ -95,8 +95,8 @@ class SpjController extends Controller
             ]);
         }
 
-        // Staf Keuangan or Super Admin with tab=konsolidasi: Antrean Konsolidasi (Spj/KonsolidasiIndex)
-        if ($userRole === UserRole::STAF_KEUANGAN->value || ($userRole === UserRole::SUPER_ADMIN->value && $tab === 'konsolidasi')) {
+        // Staf Keuangan, Camat, or Super Admin with tab=konsolidasi: Antrean Konsolidasi (Spj/KonsolidasiIndex)
+        if ($userRole === UserRole::STAF_KEUANGAN->value || (($userRole === UserRole::CAMAT->value || $userRole === UserRole::SUPER_ADMIN->value) && $tab === 'konsolidasi')) {
             $pengajuanMasuk = Spj::with(['kegiatan.kasi', 'diajukanOleh'])
                 ->where('status', SpjStatus::DIAJUKAN_KASI)
                 ->oldest('tanggal_pengajuan')
@@ -310,5 +310,51 @@ class SpjController extends Controller
         } catch (Throwable $e) {
             return back()->with('error', $e->getMessage());
         }
+    }
+
+    /**
+     * Preview or stream the SPJ evidence file securely.
+     */
+    public function previewBukti(Spj $spj): \Symfony\Component\HttpFoundation\Response
+    {
+        Gate::authorize('view', $spj);
+
+        if (! $spj->file_bukti) {
+            abort(404, 'Dokumen bukti pertanggungjawaban fisik belum dilampirkan.');
+        }
+
+        $filePath = $spj->file_bukti;
+        $disk = \Illuminate\Support\Facades\Storage::disk('public');
+
+        if ($disk->exists($filePath)) {
+            return $disk->response($filePath);
+        }
+
+        $fullPath = storage_path('app/public/' . ltrim($filePath, '/'));
+        if (file_exists($fullPath)) {
+            return response()->file($fullPath);
+        }
+
+        abort(404, 'Berkas fisik bukti dokumen tidak ditemukan pada penyimpanan server.');
+    }
+
+    /**
+     * Stream public storage files as fallback if direct Nginx symlink is bypassed.
+     */
+    public function streamStorageFile(string $folder, string $filename): \Symfony\Component\HttpFoundation\Response
+    {
+        $path = $folder . '/' . $filename;
+        $disk = \Illuminate\Support\Facades\Storage::disk('public');
+
+        if ($disk->exists($path)) {
+            return $disk->response($path);
+        }
+
+        $fullPath = storage_path('app/public/' . $path);
+        if (file_exists($fullPath)) {
+            return response()->file($fullPath);
+        }
+
+        abort(404, 'Berkas tidak ditemukan pada server.');
     }
 }

@@ -219,22 +219,54 @@ export default function Sidebar({ collapsed, setCollapsed, mobileOpen, setMobile
                         badge: null,
                     },
                     {
-                        name: 'Kegiatan & Anggaran',
+                        name: 'Kegiatan Anggaran',
                         href: '/kegiatan',
                         icon: ClipboardList,
                         badge: null,
                     },
                     {
-                        name: 'Arsip SPJ',
+                        name: 'SPJ Digital',
                         href: '/spj?tab=arsip',
                         icon: FileText,
-                        badge: null,
+                        badge: sidebar_badges?.spj_pending_verifikasi > 0
+                            ? sidebar_badges.spj_pending_verifikasi
+                            : null,
+                        badgeColor: 'bg-amber-400 text-neutral-900',
+                        subItems: [
+                            {
+                                name: 'Arsip & Rekap SPJ',
+                                href: '/spj?tab=arsip',
+                                icon: FileText,
+                            },
+                            {
+                                name: 'Antrean Verifikasi',
+                                href: '/spj?tab=verifikasi',
+                                icon: CheckCircle,
+                            },
+                            {
+                                name: 'Monitoring Konsolidasi',
+                                href: '/spj?tab=konsolidasi',
+                                icon: FileText,
+                            },
+                        ],
                     },
                     {
-                        name: 'Aset & BMD',
+                        name: 'Aset BMD',
                         href: '/aset',
                         icon: Package,
                         badge: null,
+                        subItems: [
+                            {
+                                name: 'Daftar Aset',
+                                href: '/aset',
+                                icon: Package,
+                            },
+                            {
+                                name: 'KIB / KIR',
+                                href: '/aset?tab=kib_kir',
+                                icon: FileSpreadsheet,
+                            },
+                        ],
                     },
                     {
                         name: 'Laporan Wilayah',
@@ -282,8 +314,8 @@ export default function Sidebar({ collapsed, setCollapsed, mobileOpen, setMobile
                         href="/dashboard"
                         className="flex items-center gap-3 overflow-hidden focus:outline-none"
                     >
-                        <div className="w-10 h-10 rounded-xl bg-white/15 flex items-center justify-center shrink-0 border border-white/20 shadow-inner">
-                            <Building2 className="w-5 h-5 text-white" />
+                        <div className="w-10 h-10 rounded-xl bg-white/10 p-1 flex items-center justify-center shrink-0 border border-white/20 shadow-inner overflow-hidden">
+                            <img src="/logo.png" alt="Logo SIKEMAS" className="w-full h-full object-contain" />
                         </div>
                         {!collapsed && (
                             <div className="flex flex-col min-w-0">

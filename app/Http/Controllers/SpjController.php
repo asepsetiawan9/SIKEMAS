@@ -335,6 +335,18 @@ class SpjController extends Controller
             return response()->file($fullPath);
         }
 
+        // Case-insensitive fallback
+        $dir = dirname($fullPath);
+        $base = basename($fullPath);
+        if (is_dir($dir)) {
+            $entries = scandir($dir) ?: [];
+            foreach ($entries as $entry) {
+                if (strcasecmp($entry, $base) === 0) {
+                    return response()->file($dir . DIRECTORY_SEPARATOR . $entry);
+                }
+            }
+        }
+
         abort(404, 'Berkas fisik bukti dokumen tidak ditemukan pada penyimpanan server.');
     }
 
@@ -343,6 +355,10 @@ class SpjController extends Controller
      */
     public function streamStorageFile(string $folder, string $filename): \Symfony\Component\HttpFoundation\Response
     {
+        // Sanitize folder and filename against directory traversal
+        $folder = preg_replace('/[^a-zA-Z0-9_\-]/', '', $folder) ?: 'bukti_spj';
+        $filename = basename($filename);
+
         $path = $folder . '/' . $filename;
         $disk = \Illuminate\Support\Facades\Storage::disk('public');
 
@@ -353,6 +369,17 @@ class SpjController extends Controller
         $fullPath = storage_path('app/public/' . $path);
         if (file_exists($fullPath)) {
             return response()->file($fullPath);
+        }
+
+        // Case-insensitive fallback lookup
+        $dir = storage_path('app/public/' . $folder);
+        if (is_dir($dir)) {
+            $entries = scandir($dir) ?: [];
+            foreach ($entries as $entry) {
+                if (strcasecmp($entry, $filename) === 0) {
+                    return response()->file($dir . DIRECTORY_SEPARATOR . $entry);
+                }
+            }
         }
 
         abort(404, 'Berkas tidak ditemukan pada server.');

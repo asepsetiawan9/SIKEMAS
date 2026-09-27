@@ -34,8 +34,8 @@ export default function Detail({ aset, history = [], users = [] }) {
     const { auth } = usePage().props;
     const userRole = auth?.user?.role;
     const permissions = auth?.user?.permissions || auth?.permissions || [];
-    const canUpdate = permissions.includes('aset.update') || ['staf_keuangan', 'staf_umum'].includes(userRole);
-    const canGenerateDoc = permissions.includes('aset.generate-kibkir') || userRole === 'staf_keuangan';
+    const canUpdate = permissions.includes('aset.update') || ['staf_keuangan', 'staf_umum', 'super_admin'].includes(userRole);
+    const canGenerateDoc = permissions.includes('aset.generate-kibkir') || ['staf_keuangan', 'super_admin'].includes(userRole);
 
     const [copied, setCopied] = useState(false);
     const [lightboxOpen, setLightboxOpen] = useState(false);

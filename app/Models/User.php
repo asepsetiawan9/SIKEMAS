@@ -104,6 +104,11 @@ class User extends Authenticatable
         return $this->hasMany(LogAktivitas::class, 'user_id');
     }
 
+    public function isSuperAdmin(): bool
+    {
+        return $this->role === UserRole::SUPER_ADMIN;
+    }
+
     public function isStafUmum(): bool
     {
         return $this->role === UserRole::STAF_UMUM;

@@ -375,11 +375,12 @@ class SpjService
                 throw new InvalidArgumentException("Berkas bukti hanya dapat direvisi pada pengajuan yang berstatus ditolak atau baru diajukan.");
             }
 
-            // Otorisasi: Harus pengaju (Kasi) atau Staf Keuangan
+            // Otorisasi: Harus pengaju (Kasi), Staf Keuangan, atau Super Admin
             $isPengaju = (int) $lockedSpj->diajukan_oleh === (int) $user->id;
             $isKeuangan = $user->role === UserRole::STAF_KEUANGAN || (is_string($user->role) && $user->role === UserRole::STAF_KEUANGAN->value);
+            $isSuperAdmin = $user->role === UserRole::SUPER_ADMIN || (is_string($user->role) && $user->role === UserRole::SUPER_ADMIN->value);
 
-            if (! $isPengaju && ! $isKeuangan) {
+            if (! $isPengaju && ! $isKeuangan && ! $isSuperAdmin) {
                 throw new InvalidArgumentException("Anda tidak memiliki hak untuk merevisi berkas bukti SPJ ini.");
             }
 

@@ -58,19 +58,20 @@ class SpjController extends Controller
         // Available kegiatan for filter dropdown
         $kegiatanList = Kegiatan::select('id', 'nama', 'pagu')->get();
 
-        // If tab is 'arsip' or role is camat, render the global Arsip page
-        if ($tab === 'arsip' || $userRole === UserRole::CAMAT->value) {
+        // If tab is 'arsip', role is camat, or role is super_admin (not requesting specific tab)
+        if ($tab === 'arsip' || $userRole === UserRole::CAMAT->value || ($userRole === UserRole::SUPER_ADMIN->value && ! in_array($tab, ['verifikasi', 'konsolidasi'], true))) {
             $spjs = $this->spjService->getList(15, $filters);
 
             return Inertia::render('Spj/Arsip', [
                 'spjs' => $spjs,
                 'filters' => $filters,
                 'kegiatans' => $kegiatanList,
+                'canCreateSpj' => $userRole === UserRole::KASI->value || $userRole === UserRole::SUPER_ADMIN->value,
             ]);
         }
 
-        // Sekmat: Antrean Verifikasi (Spj/VerifikasiIndex)
-        if ($userRole === UserRole::SEKMAT->value) {
+        // Sekmat or Super Admin with tab=verifikasi: Antrean Verifikasi (Spj/VerifikasiIndex)
+        if ($userRole === UserRole::SEKMAT->value || ($userRole === UserRole::SUPER_ADMIN->value && $tab === 'verifikasi')) {
             $antrean = Spj::with(['kegiatan.kasi', 'diajukanOleh', 'dikonsolidasiOleh'])
                 ->where('status', SpjStatus::DIAJUKAN_VERIFIKASI)
                 ->oldest('tanggal_konsolidasi')
@@ -94,8 +95,8 @@ class SpjController extends Controller
             ]);
         }
 
-        // Staf Keuangan: Antrean Konsolidasi (Spj/KonsolidasiIndex)
-        if ($userRole === UserRole::STAF_KEUANGAN->value) {
+        // Staf Keuangan or Super Admin with tab=konsolidasi: Antrean Konsolidasi (Spj/KonsolidasiIndex)
+        if ($userRole === UserRole::STAF_KEUANGAN->value || ($userRole === UserRole::SUPER_ADMIN->value && $tab === 'konsolidasi')) {
             $pengajuanMasuk = Spj::with(['kegiatan.kasi', 'diajukanOleh'])
                 ->where('status', SpjStatus::DIAJUKAN_KASI)
                 ->oldest('tanggal_pengajuan')
@@ -129,27 +130,35 @@ class SpjController extends Controller
             'filters' => $filters,
             'kegiatans' => $kegiatanList,
             'hasRejectedSpj' => $hasRejected,
+            'canCreateSpj' => true,
         ]);
     }
 
     /**
-     * Show form for creating a new SPJ (Kasi).
+     * Show form for creating a new SPJ (Kasi or Super Admin).
      */
     public function create(Request $request): Response|RedirectResponse
     {
         Gate::authorize('create', Spj::class);
 
         $user = $request->user();
+        $userRole = $user->role instanceof UserRole ? $user->role->value : (string) $user->role;
 
         // Check BR-SPJ-10: Kasi blocked if there is any pending rejected SPJ
-        $hasRejectedSpj = Spj::where('diajukan_oleh', $user->id)
-            ->where('status', SpjStatus::DITOLAK)
-            ->exists();
+        $hasRejectedSpj = false;
+        if ($userRole === UserRole::KASI->value) {
+            $hasRejectedSpj = Spj::where('diajukan_oleh', $user->id)
+                ->where('status', SpjStatus::DITOLAK)
+                ->exists();
+        }
 
-        // Get active activities belonging to Kasi
-        $kegiatans = Kegiatan::where('kasi_id', $user->id)
-            ->where('status', StatusKegiatan::AKTIF)
-            ->get()
+        // Get active activities: filter by Kasi ID if Kasi, or all active if Super Admin
+        $kegiatansQuery = Kegiatan::where('status', StatusKegiatan::AKTIF);
+        if ($userRole === UserRole::KASI->value) {
+            $kegiatansQuery->where('kasi_id', $user->id);
+        }
+
+        $kegiatans = $kegiatansQuery->get()
             ->map(fn (Kegiatan $k) => [
                 'id' => $k->id,
                 'nama' => $k->nama,
@@ -172,7 +181,7 @@ class SpjController extends Controller
     }
 
     /**
-     * Store a newly created SPJ (Kasi).
+     * Store a newly created SPJ (Kasi or Super Admin).
      */
     public function store(StoreSpjRequest $request): RedirectResponse
     {
@@ -213,7 +222,7 @@ class SpjController extends Controller
     }
 
     /**
-     * Consolidate the SPJ and generate official SPJ number (Staf Keuangan).
+     * Consolidate the SPJ and generate official SPJ number (Staf Keuangan or Super Admin).
      */
     public function konsolidasi(Request $request, Spj $spj): RedirectResponse
     {
@@ -233,7 +242,7 @@ class SpjController extends Controller
     }
 
     /**
-     * Submit SPJ for verification to Sekmat (Staf Keuangan).
+     * Submit SPJ for verification to Sekmat (Staf Keuangan or Super Admin).
      */
     public function ajukanVerifikasi(Request $request, Spj $spj): RedirectResponse
     {
@@ -249,7 +258,7 @@ class SpjController extends Controller
     }
 
     /**
-     * Verify or reject SPJ (Sekmat).
+     * Verify or reject SPJ (Sekmat or Super Admin).
      */
     public function verifikasi(VerifikasiSpjRequest $request, Spj $spj): RedirectResponse
     {
@@ -275,7 +284,7 @@ class SpjController extends Controller
     }
 
     /**
-     * Upload revised evidence file for rejected SPJ (Kasi or Staf Keuangan).
+     * Upload revised evidence file for rejected SPJ (Kasi, Staf Keuangan or Super Admin).
      */
     public function revisiBukti(Request $request, Spj $spj): RedirectResponse
     {

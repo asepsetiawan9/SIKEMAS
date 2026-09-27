@@ -48,6 +48,7 @@ class RolePermissionSeeder extends Seeder
 
         // Roles mapping
         $rolesWithPermissions = [
+            UserRole::SUPER_ADMIN->value => $permissions,
             UserRole::STAF_UMUM->value => [
                 'aset.update',
                 'aset.view',

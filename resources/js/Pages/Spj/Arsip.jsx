@@ -27,6 +27,8 @@ export default function Arsip({
     const { auth } = usePage().props;
     const userRole = auth?.user?.role;
     const isKasi = userRole === 'kasi';
+    const isSuperAdmin = userRole === 'super_admin';
+    const canCreateSpj = isKasi || isSuperAdmin;
 
     const [search, setSearch] = useState(filters.search || '');
     const [status, setStatus] = useState(filters.status || '');
@@ -95,7 +97,7 @@ export default function Arsip({
                         </p>
                     </div>
 
-                    {isKasi && (
+                    {canCreateSpj && (
                         <Link
                             href="/spj/create"
                             className="inline-flex items-center gap-2 px-4 py-2.5 bg-primary text-white rounded-btn text-xs font-bold hover:bg-primary-dark shadow-sm hover:shadow transition-all"

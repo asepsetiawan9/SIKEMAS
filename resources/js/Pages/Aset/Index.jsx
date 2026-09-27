@@ -35,8 +35,8 @@ export default function Index({
     const { auth } = usePage().props;
     const userRole = auth?.user?.role;
     const permissions = auth?.user?.permissions || auth?.permissions || [];
-    const canCreate = permissions.includes('aset.create') || userRole === 'staf_keuangan';
-    const canUpdate = permissions.includes('aset.update') || ['staf_keuangan', 'staf_umum'].includes(userRole);
+    const canCreate = permissions.includes('aset.create') || ['staf_keuangan', 'super_admin'].includes(userRole);
+    const canUpdate = permissions.includes('aset.update') || ['staf_keuangan', 'staf_umum', 'super_admin'].includes(userRole);
 
     const [searchTerm, setSearchTerm] = useState(filters.search || '');
     const [kondisi, setKondisi] = useState(filters.kondisi || '');

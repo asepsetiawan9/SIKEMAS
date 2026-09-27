@@ -59,13 +59,13 @@ class HandleInertiaRequests extends Middleware
             ],
             'notif_count' => $user ? Notifikasi::where('user_id', $user->id)->where('is_read', false)->count() : 0,
             'sidebar_badges' => $user ? [
-                'spj_pending_konsolidasi' => ($user->role === UserRole::STAF_KEUANGAN || (is_string($user->role) && $user->role === UserRole::STAF_KEUANGAN->value))
+                'spj_pending_konsolidasi' => in_array($user->role instanceof UserRole ? $user->role->value : (string) $user->role, [UserRole::STAF_KEUANGAN->value, UserRole::SUPER_ADMIN->value], true)
                     ? Spj::where('status', SpjStatus::DIAJUKAN_KASI)->count()
                     : 0,
-                'spj_pending_verifikasi' => ($user->role === UserRole::SEKMAT || (is_string($user->role) && $user->role === UserRole::SEKMAT->value))
+                'spj_pending_verifikasi' => in_array($user->role instanceof UserRole ? $user->role->value : (string) $user->role, [UserRole::SEKMAT->value, UserRole::SUPER_ADMIN->value], true)
                     ? Spj::where('status', SpjStatus::DIAJUKAN_VERIFIKASI)->count()
                     : 0,
-                'spj_ditolak_kasi' => ($user->role === UserRole::KASI || (is_string($user->role) && $user->role === UserRole::KASI->value))
+                'spj_ditolak_kasi' => in_array($user->role instanceof UserRole ? $user->role->value : (string) $user->role, [UserRole::KASI->value], true)
                     ? Spj::where('diajukan_oleh', $user->id)->where('status', SpjStatus::DITOLAK)->count()
                     : 0,
             ] : [],

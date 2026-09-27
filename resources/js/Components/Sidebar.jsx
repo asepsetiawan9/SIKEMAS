@@ -28,6 +28,72 @@ export default function Sidebar({ collapsed, setCollapsed, mobileOpen, setMobile
     // Construct role-specific menu items per Bagian 9
     const getMenuItems = () => {
         switch (userRole) {
+            case 'super_admin':
+                return [
+                    {
+                        name: 'Dashboard',
+                        href: '/dashboard',
+                        icon: BarChart3,
+                        badge: null,
+                    },
+                    {
+                        name: 'Kegiatan Anggaran',
+                        href: '/kegiatan',
+                        icon: ClipboardList,
+                        badge: null,
+                    },
+                    {
+                        name: 'SPJ Digital',
+                        href: '/spj',
+                        icon: FileText,
+                        badge: sidebar_badges?.spj_pending_konsolidasi > 0
+                            ? sidebar_badges.spj_pending_konsolidasi
+                            : null,
+                        badgeColor: 'bg-amber-400 text-neutral-900',
+                        subItems: [
+                            {
+                                name: 'Arsip & Rekap SPJ',
+                                href: '/spj?tab=arsip',
+                                icon: FileText,
+                            },
+                            {
+                                name: 'Antrean Konsolidasi',
+                                href: '/spj?tab=konsolidasi',
+                                icon: FileText,
+                            },
+                            {
+                                name: 'Antrean Verifikasi',
+                                href: '/spj?tab=verifikasi',
+                                icon: CheckCircle,
+                            },
+                        ],
+                    },
+                    {
+                        name: 'Aset BMD',
+                        href: '/aset',
+                        icon: Package,
+                        badge: null,
+                        subItems: [
+                            {
+                                name: 'Daftar Aset',
+                                href: '/aset',
+                                icon: Package,
+                            },
+                            {
+                                name: 'KIB / KIR',
+                                href: '/aset?tab=kib_kir',
+                                icon: FileSpreadsheet,
+                            },
+                        ],
+                    },
+                    {
+                        name: 'Laporan & Rekap',
+                        href: '/laporan',
+                        icon: TrendingUp,
+                        badge: null,
+                    },
+                ];
+
             case 'staf_umum':
                 return [
                     {

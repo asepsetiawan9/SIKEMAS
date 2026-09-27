@@ -47,8 +47,8 @@ class DashboardController extends Controller
             return Inertia::render('Dashboard/CamatDashboard', $data);
         }
 
-        // Staf Keuangan & Sekmat Dashboard (Operasional / Monitoring / Verifikasi)
-        if ($role === UserRole::STAF_KEUANGAN || $role === UserRole::SEKMAT) {
+        // Super Admin, Staf Keuangan & Sekmat Dashboard (Operasional / Monitoring / Verifikasi)
+        if ($role === UserRole::SUPER_ADMIN || $role === UserRole::STAF_KEUANGAN || $role === UserRole::SEKMAT) {
             $data = $this->dashboardService->getStafSekmatDashboard($role->value);
             return Inertia::render('Dashboard/StafSekmatDashboard', $data);
         }

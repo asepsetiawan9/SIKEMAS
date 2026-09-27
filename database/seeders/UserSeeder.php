@@ -19,6 +19,15 @@ class UserSeeder extends Seeder
     {
         $users = [
             [
+                'name' => 'Super Administrator',
+                'email' => 'superadmin@sikemas.test',
+                'role' => UserRole::SUPER_ADMIN,
+                'seksi' => null,
+                'nip' => '198001011999011000',
+                'jabatan' => 'Super Administrator / Full Access',
+                'no_hp' => '081234567800',
+            ],
+            [
                 'name' => 'Admin Umum',
                 'email' => 'umum@sikemas.test',
                 'role' => UserRole::STAF_UMUM,

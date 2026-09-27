@@ -155,4 +155,22 @@ class RolePermissionPolicyTest extends TestCase
         $this->actingAs($camat)->get(route('spj.create'))->assertStatus(403);
         $this->actingAs($camat)->get(route('aset.create'))->assertStatus(403);
     }
+
+    public function test_super_admin_has_full_access(): void
+    {
+        $superAdmin = User::factory()->create([
+            'role' => UserRole::SUPER_ADMIN,
+            'is_active' => true,
+        ]);
+        $superAdmin->assignRole(UserRole::SUPER_ADMIN->value);
+
+        // Super Admin can access dashboard, reports, kegiatan, aset create, spj index and spj create
+        $this->actingAs($superAdmin)->get(route('dashboard'))->assertStatus(200);
+        $this->actingAs($superAdmin)->get(route('laporan.index'))->assertStatus(200);
+        $this->actingAs($superAdmin)->get(route('kegiatan.index'))->assertStatus(200);
+        $this->actingAs($superAdmin)->get(route('aset.index'))->assertStatus(200);
+        $this->actingAs($superAdmin)->get(route('aset.create'))->assertStatus(200);
+        $this->actingAs($superAdmin)->get(route('spj.index'))->assertStatus(200);
+        $this->actingAs($superAdmin)->get(route('spj.create'))->assertStatus(200);
+    }
 }

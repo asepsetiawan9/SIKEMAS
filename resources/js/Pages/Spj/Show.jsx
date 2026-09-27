@@ -40,9 +40,10 @@ export default function Show({ spj, logs = [], sisa_pagu_kegiatan = 0 }) {
     const [revisiCatatan, setRevisiCatatan] = useState('');
     const [revisiLoading, setRevisiLoading] = useState(false);
 
-    const isKasiPengaju = userRole === 'kasi' && currentUserId === spj.diajukan_oleh;
-    const isStafKeuangan = userRole === 'staf_keuangan';
-    const isSekmat = userRole === 'sekmat';
+    const isSuperAdmin = userRole === 'super_admin';
+    const isKasiPengaju = (userRole === 'kasi' && currentUserId === spj.diajukan_oleh) || isSuperAdmin;
+    const isStafKeuangan = userRole === 'staf_keuangan' || isSuperAdmin;
+    const isSekmat = userRole === 'sekmat' || isSuperAdmin;
 
     const handleRevisiSubmit = (e) => {
         e.preventDefault();

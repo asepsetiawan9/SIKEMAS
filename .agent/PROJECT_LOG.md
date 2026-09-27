@@ -247,3 +247,17 @@ Format: Atomic Logging `[Timestamp] - [Fase] - [Apa | Kenapa | Dampak]`
 - **Status**: Live Production Active ✅.
 - **Blockers**: Tidak ada.
 
+### [2026-09-27 19:35] - Pembersihan Demo Login, Push ke GitHub & Redeployment VPS
+- **Apa**:
+  1. Menghapus komponen Demo Quick Login switcher dan nilai default form kredensial pada `resources/js/Pages/Auth/Login.jsx` agar form login bersih dan siap 100% untuk lingkungan produksi.
+  2. Eksekusi kompilasi ulang assets frontend Vite (`npm run build`) dan pengujian suite PHPUnit (78 tests, 460 assertions, 100% pass).
+  3. Inisialisasi Git lokal, pengaturan branch `main`, konfigurasi remote repository GitHub `https://github.com/asepsetiawan9/SIKEMAS.git`, dan eksekusi `git push -u origin main`.
+  4. Konfigurasi Git pada direktori server produksi `/var/www/sikemas` di VPS `36.64.200.242:2020` agar terhubung langsung dengan repository GitHub origin `main`.
+  5. Sinkronisasi artefak build frontend (`public/build`) ke VPS, pembaruan hak akses direktori (`storage`, `bootstrap/cache`), dan pembersihan serta kompilasi ulang seluruh cache Laravel (`config:cache`, `route:cache`, `view:cache`, `event:cache`).
+  6. Graceful reload PHP-FPM dan Nginx pada VPS server.
+  7. Verifikasi otomatis via browser subagent terhadap URL live `https://sikemas.initd.web.id/login`: terkonfirmasi form login tampil bersih tanpa box demo akun, respon HTTP 200 OK, dan UI siap pakai.
+- **Kenapa**: Memenuhi instruksi Mr Zeps untuk membersihkan demo akun pada form login untuk kesiapan produksi, menyimpan seluruh sistem ke repositori GitHub, serta melakukan deployment ulang ke VPS.
+- **Dampaknya**: Repositori GitHub telah sinkron dan up-to-date, halaman login live di VPS kini resmi steril dari akun demo, dan sistem beroperasi dalam performa optimal di server produksi.
+- **Status**: Completed ✅ (100% Production Ready & Synced to Git).
+- **Blockers**: Tidak ada.
+

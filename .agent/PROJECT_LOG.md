@@ -408,4 +408,27 @@ Format: Atomic Logging `[Timestamp] - [Fase] - [Apa | Kenapa | Dampak]`
 - **Dampaknya**: Seluruh fungsionalitas CRUD (Program, Kegiatan, Sub Kegiatan, Belanja, Unggah Bukti, dan Verifikasi Berjenjang) telah bebas dari error fatal, berjalan 100% mulus dengan perlindungan Clean Architecture, dan terverifikasi secara otomatis tanpa intervensi manual.
 - **Status**: Audit & CRUD Testing 100% COMPLETED ✅. Zero Bugs.
 
+### [2026-09-28 20:02] - 🚀 PUSH REPOSITORI GIT & DEPLOYMENT LIVE PRODUCTION KE VPS
+- **Apa**:
+  1. Melakukan build bundle frontend produksi (`npm run build`, Vite v7.3.6) secara lokal untuk mencegah bahaya OOM Killer pada VPS sesuai `PANDUAN_ISOLASI_VPS_MULTI_APP.md`.
+  2. Eksekusi pengujian otomatis `php artisan test`: 91 tests, 581 assertions, **100% PASS**.
+  3. Staging seluruh pembaharuan kode SIMPEL KAN v2 (RAP/Belanja/Verifikasi/Testing Suite) dan pembuatan commit atomic `feat(v2): implement SIMPEL KAN v2 RAP belanja and proof document verification workflow` & `fix(deploy): ensure both php8.5-fpm and php8.2-fpm reload support in deployment script`.
+  4. Eksekusi `git push origin main` ke remote repository GitHub `https://github.com/asepsetiawan9/SIKEMAS.git`.
+  5. Sinkronisasi perubahan di server VPS produksi (`36.64.200.242:2020` / `/var/www/sikemas`) via `git pull origin main`.
+  6. Transfer dan unpacking bundle aset produksi (`public/build`) ke `/var/www/sikemas/public/build` via `pscp.exe`.
+  7. Menjalankan `composer install --no-dev --prefer-dist --optimize-autoloader --no-interaction --ignore-platform-req=php` di VPS.
+  8. Mengeksekusi 7 database migrations baru di server produksi (`program`, `kegiatan_rap`, `sub_kegiatan`, `belanja`, `dokumen_bukti`, `riwayat_proses`, `add_extra_fields_to_belanja_table`).
+  9. Eksekusi `php artisan db:seed --class=BelanjaV2Seeder --force` di server produksi untuk inisialisasi role operator dan data acuan RAP/Belanja.
+  10. Pembaruan dan optimasi seluruh cache Laravel: `config:cache`, `route:cache`, `view:cache`, `event:cache`.
+  11. Pengaturan hak akses direktori storage dan cache (`chown -R www-data:www-data`, `chmod -R 775`).
+  12. Graceful reload PHP-FPM (`php8.5-fpm`) dan Nginx (`systemctl reload nginx` setelah `nginx -t` OK), serta restart queue worker.
+  13. Audit verifikasi kesehatan pasca-deployment:
+      - `https://sikemas.initd.web.id/login` terkonfirmasi `HTTP 200 OK` dengan asset bundle terbaru.
+      - Seluruh aplikasi eksisting di VPS (`LENTERA`, `SIKOS`, `SIPELAJAR`) diverifikasi tetap `HTTP 200 OK` tanpa downtime.
+- **Kenapa**: Menjalankan instruksi Mr Zeps untuk mem-push seluruh pembaharuan sistem ke repositori Git dan melakukan deployment langsung ke server VPS produksi.
+- **Dampaknya**: Seluruh pembaharuan sistem SIMPEL KAN v2.0 kini resmi tersimpan aman di GitHub dan aktif melayani pengguna secara live di [https://sikemas.initd.web.id](https://sikemas.initd.web.id) dengan performa prima, zero downtime, dan integritas multi-tenant server terjaga 100%.
+- **Status**: Git Push & VPS Production Deployment COMPLETED ✅.
+- **Blockers**: Tidak ada.
+
+
 

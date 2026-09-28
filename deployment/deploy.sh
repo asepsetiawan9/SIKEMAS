@@ -41,7 +41,7 @@ php artisan event:cache
 
 # 8. Restart Background Services
 echo "🔄 Merestart PHP-FPM dan Queue Worker..."
-sudo systemctl reload php8.2-fpm || true
+sudo systemctl reload php8.5-fpm || sudo systemctl reload php8.2-fpm || true
 php artisan queue:restart || true
 
 # 9. Nonaktifkan Mode Pemeliharaan

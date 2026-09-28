@@ -4,13 +4,16 @@ import {
     BarChart3,
     ClipboardList,
     FileText,
-    Package,
-    FileSpreadsheet,
     TrendingUp,
     CheckCircle,
     ChevronLeft,
     ChevronRight,
     Building2,
+    FolderTree,
+    ReceiptText,
+    PlusCircle,
+    CheckSquare,
+    ShieldCheck,
 } from 'lucide-react';
 
 export default function Sidebar({ collapsed, setCollapsed, mobileOpen, setMobileOpen }) {
@@ -25,9 +28,46 @@ export default function Sidebar({ collapsed, setCollapsed, mobileOpen, setMobile
         return false;
     };
 
-    // Construct role-specific menu items per Bagian 9
+    // Construct role-specific menu items per V2 RAP/SPJ Bukti Belanja architecture
     const getMenuItems = () => {
         switch (userRole) {
+            case 'operator':
+                return [
+                    {
+                        name: 'Dashboard',
+                        href: '/dashboard',
+                        icon: BarChart3,
+                        badge: null,
+                    },
+                    {
+                        name: 'Program & Hierarki',
+                        href: '/program',
+                        icon: FolderTree,
+                        badge: null,
+                    },
+                    {
+                        name: 'Belanja & Bukti SPJ',
+                        href: '/belanja',
+                        icon: ReceiptText,
+                        badge: sidebar_badges?.belanja_revisi_operator > 0
+                            ? sidebar_badges.belanja_revisi_operator
+                            : null,
+                        badgeColor: 'bg-rose-500 text-white',
+                    },
+                    {
+                        name: 'Catat Belanja Baru',
+                        href: '/belanja/create',
+                        icon: PlusCircle,
+                        badge: null,
+                    },
+                    {
+                        name: 'Laporan & Rekap',
+                        href: '/laporan',
+                        icon: TrendingUp,
+                        badge: null,
+                    },
+                ];
+
             case 'super_admin':
                 return [
                     {
@@ -37,139 +77,52 @@ export default function Sidebar({ collapsed, setCollapsed, mobileOpen, setMobile
                         badge: null,
                     },
                     {
-                        name: 'Kegiatan Anggaran',
-                        href: '/kegiatan',
-                        icon: ClipboardList,
+                        name: 'Program & RAP',
+                        href: '/program',
+                        icon: FolderTree,
                         badge: null,
                     },
                     {
-                        name: 'SPJ Digital',
-                        href: '/spj',
-                        icon: FileText,
-                        badge: sidebar_badges?.spj_pending_konsolidasi > 0
-                            ? sidebar_badges.spj_pending_konsolidasi
+                        name: 'Belanja & Bukti SPJ',
+                        href: '/belanja',
+                        icon: ReceiptText,
+                        badge: null,
+                        subItems: [
+                            {
+                                name: 'Daftar Belanja',
+                                href: '/belanja',
+                                icon: ReceiptText,
+                            },
+                            {
+                                name: 'Catat Belanja Baru',
+                                href: '/belanja/create',
+                                icon: PlusCircle,
+                            },
+                        ],
+                    },
+                    {
+                        name: 'Verifikasi Sekmat',
+                        href: '/verifikasi/sekmat',
+                        icon: CheckSquare,
+                        badge: sidebar_badges?.belanja_pending_sekmat > 0
+                            ? sidebar_badges.belanja_pending_sekmat
                             : null,
-                        badgeColor: 'bg-amber-400 text-neutral-900',
-                        subItems: [
-                            {
-                                name: 'Arsip & Rekap SPJ',
-                                href: '/spj?tab=arsip',
-                                icon: FileText,
-                            },
-                            {
-                                name: 'Antrean Konsolidasi',
-                                href: '/spj?tab=konsolidasi',
-                                icon: FileText,
-                            },
-                            {
-                                name: 'Antrean Verifikasi',
-                                href: '/spj?tab=verifikasi',
-                                icon: CheckCircle,
-                            },
-                        ],
+                        badgeColor: 'bg-amber-500 text-white',
                     },
                     {
-                        name: 'Aset BMD',
-                        href: '/aset',
-                        icon: Package,
-                        badge: null,
-                        subItems: [
-                            {
-                                name: 'Daftar Aset',
-                                href: '/aset',
-                                icon: Package,
-                            },
-                            {
-                                name: 'KIB / KIR',
-                                href: '/aset?tab=kib_kir',
-                                icon: FileSpreadsheet,
-                            },
-                        ],
+                        name: 'Persetujuan Camat',
+                        href: '/verifikasi/camat',
+                        icon: ShieldCheck,
+                        badge: sidebar_badges?.belanja_pending_camat > 0
+                            ? sidebar_badges.belanja_pending_camat
+                            : null,
+                        badgeColor: 'bg-emerald-600 text-white',
                     },
                     {
                         name: 'Laporan & Rekap',
                         href: '/laporan',
                         icon: TrendingUp,
                         badge: null,
-                    },
-                ];
-
-            case 'staf_umum':
-                return [
-                    {
-                        name: 'Aset BMD',
-                        href: '/aset',
-                        icon: Package,
-                        badge: null,
-                    },
-                ];
-
-            case 'staf_keuangan':
-                return [
-                    {
-                        name: 'Dashboard',
-                        href: '/dashboard',
-                        icon: BarChart3,
-                        badge: null,
-                    },
-                    {
-                        name: 'Kegiatan Anggaran',
-                        href: '/kegiatan',
-                        icon: ClipboardList,
-                        badge: null,
-                    },
-                    {
-                        name: 'SPJ Digital',
-                        href: '/spj',
-                        icon: FileText,
-                        badge: sidebar_badges?.spj_pending_konsolidasi > 0
-                            ? sidebar_badges.spj_pending_konsolidasi
-                            : null,
-                        badgeColor: 'bg-amber-400 text-neutral-900',
-                    },
-                    {
-                        name: 'Aset BMD',
-                        href: '/aset',
-                        icon: Package,
-                        badge: null,
-                        subItems: [
-                            {
-                                name: 'KIB / KIR',
-                                href: '/aset?tab=kib_kir',
-                                icon: FileSpreadsheet,
-                            },
-                        ],
-                    },
-                    {
-                        name: 'Laporan & Rekap',
-                        href: '/laporan',
-                        icon: TrendingUp,
-                        badge: null,
-                    },
-                ];
-
-            case 'kasi':
-                return [
-                    {
-                        name: 'Dashboard',
-                        href: '/dashboard',
-                        icon: BarChart3,
-                        badge: null,
-                    },
-                    {
-                        name: 'Kegiatan Anggaran',
-                        href: '/kegiatan',
-                        icon: ClipboardList,
-                        badge: null,
-                    },
-                    {
-                        name: 'Pengajuan SPJ',
-                        href: '/spj',
-                        icon: FileText,
-                        badge: sidebar_badges?.spj_ditolak_kasi > 0
-                            ? sidebar_badges.spj_ditolak_kasi
-                            : null,
-                        badgeColor: 'bg-rose-500 text-white',
                     },
                 ];
 
@@ -182,24 +135,24 @@ export default function Sidebar({ collapsed, setCollapsed, mobileOpen, setMobile
                         badge: null,
                     },
                     {
-                        name: 'Verifikasi SPJ',
-                        href: '/spj',
-                        icon: CheckCircle,
-                        badge: sidebar_badges?.spj_pending_verifikasi > 0
-                            ? sidebar_badges.spj_pending_verifikasi
+                        name: 'Antrean Verifikasi',
+                        href: '/verifikasi/sekmat',
+                        icon: CheckSquare,
+                        badge: sidebar_badges?.belanja_pending_sekmat > 0
+                            ? sidebar_badges.belanja_pending_sekmat
                             : null,
-                        badgeColor: 'bg-amber-400 text-neutral-900',
+                        badgeColor: 'bg-amber-500 text-white',
                     },
                     {
-                        name: 'Kegiatan Anggaran',
-                        href: '/kegiatan',
-                        icon: ClipboardList,
+                        name: 'Arsip Belanja & Bukti',
+                        href: '/belanja',
+                        icon: ReceiptText,
                         badge: null,
                     },
                     {
-                        name: 'Aset BMD',
-                        href: '/aset',
-                        icon: Package,
+                        name: 'Program & Hierarki',
+                        href: '/program',
+                        icon: FolderTree,
                         badge: null,
                     },
                     {
@@ -219,57 +172,64 @@ export default function Sidebar({ collapsed, setCollapsed, mobileOpen, setMobile
                         badge: null,
                     },
                     {
-                        name: 'Kegiatan Anggaran',
-                        href: '/kegiatan',
-                        icon: ClipboardList,
-                        badge: null,
-                    },
-                    {
-                        name: 'SPJ Digital',
-                        href: '/spj?tab=arsip',
-                        icon: FileText,
-                        badge: sidebar_badges?.spj_pending_verifikasi > 0
-                            ? sidebar_badges.spj_pending_verifikasi
+                        name: 'Persetujuan Belanja',
+                        href: '/verifikasi/camat',
+                        icon: ShieldCheck,
+                        badge: sidebar_badges?.belanja_pending_camat > 0
+                            ? sidebar_badges.belanja_pending_camat
                             : null,
-                        badgeColor: 'bg-amber-400 text-neutral-900',
-                        subItems: [
-                            {
-                                name: 'Arsip & Rekap SPJ',
-                                href: '/spj?tab=arsip',
-                                icon: FileText,
-                            },
-                            {
-                                name: 'Antrean Verifikasi',
-                                href: '/spj?tab=verifikasi',
-                                icon: CheckCircle,
-                            },
-                            {
-                                name: 'Monitoring Konsolidasi',
-                                href: '/spj?tab=konsolidasi',
-                                icon: FileText,
-                            },
-                        ],
+                        badgeColor: 'bg-emerald-600 text-white',
                     },
                     {
-                        name: 'Aset BMD',
-                        href: '/aset',
-                        icon: Package,
+                        name: 'Arsip Belanja & Bukti',
+                        href: '/belanja',
+                        icon: ReceiptText,
                         badge: null,
-                        subItems: [
-                            {
-                                name: 'Daftar Aset',
-                                href: '/aset',
-                                icon: Package,
-                            },
-                            {
-                                name: 'KIB / KIR',
-                                href: '/aset?tab=kib_kir',
-                                icon: FileSpreadsheet,
-                            },
-                        ],
+                    },
+                    {
+                        name: 'Program & Hierarki',
+                        href: '/program',
+                        icon: FolderTree,
+                        badge: null,
                     },
                     {
                         name: 'Laporan Wilayah',
+                        href: '/laporan',
+                        icon: TrendingUp,
+                        badge: null,
+                    },
+                ];
+
+            case 'staf_keuangan':
+            case 'staf_umum':
+            case 'kasi':
+                return [
+                    {
+                        name: 'Dashboard',
+                        href: '/dashboard',
+                        icon: BarChart3,
+                        badge: null,
+                    },
+                    {
+                        name: 'Program & RAP',
+                        href: '/program',
+                        icon: FolderTree,
+                        badge: null,
+                    },
+                    {
+                        name: 'Belanja & Bukti SPJ',
+                        href: '/belanja',
+                        icon: ReceiptText,
+                        badge: null,
+                    },
+                    {
+                        name: 'Catat Belanja Baru',
+                        href: '/belanja/create',
+                        icon: PlusCircle,
+                        badge: null,
+                    },
+                    {
+                        name: 'Laporan & Rekap',
                         href: '/laporan',
                         icon: TrendingUp,
                         badge: null,

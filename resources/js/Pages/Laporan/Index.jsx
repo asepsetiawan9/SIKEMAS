@@ -144,6 +144,8 @@ export default function Index({
                         <Wallet className="w-4 h-4" />
                         Laporan Realisasi Keuangan & SPJ
                     </button>
+                    {/* Tab BMD di-hide sesuai instruksi rapat */}
+                    {/*
                     <button
                         onClick={() => handleTabChange('aset')}
                         className={`px-4 py-2.5 text-xs font-bold transition-colors border-b-2 flex items-center gap-2 ${
@@ -155,6 +157,7 @@ export default function Index({
                         <Package className="w-4 h-4" />
                         Rekapitulasi Inventaris Aset (BMD)
                     </button>
+                    */}
                 </div>
 
                 {/* Filter Form Card */}

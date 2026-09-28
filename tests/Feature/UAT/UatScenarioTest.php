@@ -145,10 +145,8 @@ class UatScenarioTest extends TestCase
         $response = $this->actingAs($this->kasi)->get(route('dashboard'));
         $response->assertOk();
         $response->assertInertia(fn($page) => $page
-            ->component('Dashboard/KasiDashboard')
-            ->has('kegiatanList')
-            ->has('kegiatanChart')
-            ->has('spjStatusChart')
+            ->component('Dashboard/Index')
+            ->has('stats')
         );
 
         // 2. Kasi Ajukan SPJ
@@ -223,8 +221,8 @@ class UatScenarioTest extends TestCase
         $dashboardResponse = $this->actingAs($this->stafKeuangan)->get(route('dashboard'));
         $dashboardResponse->assertOk();
         $dashboardResponse->assertInertia(fn($page) => $page
-            ->component('Dashboard/StafSekmatDashboard')
-            ->where('role', 'staf_keuangan')
+            ->component('Dashboard/Index')
+            ->where('userRole', 'staf_keuangan')
         );
 
         // 2. Lihat Pengajuan Masuk
@@ -281,8 +279,8 @@ class UatScenarioTest extends TestCase
         $dashboardResponse = $this->actingAs($this->sekmat)->get(route('dashboard'));
         $dashboardResponse->assertOk();
         $dashboardResponse->assertInertia(fn($page) => $page
-            ->component('Dashboard/StafSekmatDashboard')
-            ->where('role', 'sekmat')
+            ->component('Dashboard/Index')
+            ->where('userRole', 'sekmat')
         );
 
         // 2. Verifikasi SPJ - Reject dengan Alasan Wajib
@@ -406,12 +404,8 @@ class UatScenarioTest extends TestCase
         $dashboardResponse = $this->actingAs($this->camat)->get(route('dashboard'));
         $dashboardResponse->assertOk();
         $dashboardResponse->assertInertia(fn($page) => $page
-            ->component('Dashboard/CamatDashboard')
-            ->has('stats.total_pagu')
-            ->has('stats.total_realisasi')
-            ->has('stats.persen_realisasi')
-            ->has('seksiSummary')
-            ->has('asetKondisiChart')
+            ->component('Dashboard/Index')
+            ->where('userRole', 'camat')
         );
 
         // 2. Read-Only Protection: Camat tidak boleh membuat SPJ

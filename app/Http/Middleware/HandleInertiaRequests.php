@@ -59,6 +59,15 @@ class HandleInertiaRequests extends Middleware
             ],
             'notif_count' => $user ? Notifikasi::where('user_id', $user->id)->where('is_read', false)->count() : 0,
             'sidebar_badges' => $user ? [
+                'belanja_pending_sekmat' => in_array($user->role instanceof UserRole ? $user->role->value : (string) $user->role, [UserRole::SEKMAT->value, UserRole::SUPER_ADMIN->value], true)
+                    ? \App\Models\Belanja::where('status_verifikasi', \App\Enums\StatusVerifikasi::DIAJUKAN)->count()
+                    : 0,
+                'belanja_pending_camat' => in_array($user->role instanceof UserRole ? $user->role->value : (string) $user->role, [UserRole::CAMAT->value, UserRole::SUPER_ADMIN->value], true)
+                    ? \App\Models\Belanja::where('status_verifikasi', \App\Enums\StatusVerifikasi::DIVERIFIKASI_SEKMAT)->count()
+                    : 0,
+                'belanja_revisi_operator' => in_array($user->role instanceof UserRole ? $user->role->value : (string) $user->role, [UserRole::OPERATOR->value, UserRole::SUPER_ADMIN->value], true)
+                    ? \App\Models\Belanja::whereIn('status_verifikasi', [\App\Enums\StatusVerifikasi::DIKEMBALIKAN_SEKMAT, \App\Enums\StatusVerifikasi::DIKEMBALIKAN_CAMAT])->count()
+                    : 0,
                 'spj_pending_konsolidasi' => in_array($user->role instanceof UserRole ? $user->role->value : (string) $user->role, [UserRole::STAF_KEUANGAN->value, UserRole::SUPER_ADMIN->value], true)
                     ? Spj::where('status', SpjStatus::DIAJUKAN_KASI)->count()
                     : 0,

@@ -5,8 +5,7 @@ declare(strict_types=1);
 namespace App\Http\Controllers;
 
 use App\Enums\UserRole;
-use App\Services\DashboardService;
-use Illuminate\Http\RedirectResponse;
+use App\Repositories\BelanjaRepository;
 use Illuminate\Http\Request;
 use Inertia\Inertia;
 use Inertia\Response;
@@ -14,45 +13,35 @@ use Inertia\Response;
 class DashboardController extends Controller
 {
     public function __construct(
-        private readonly DashboardService $dashboardService
+        protected BelanjaRepository $belanjaRepository
     ) {}
 
     /**
-     * Display the appropriate dashboard based on user role.
+     * Tampilan dashboard sederhana berbasis angka ringkasan SPJ / Bukti Belanja.
+     * Sesuai mandat rapat: bukan sistem keuangan kompleks, fokus pada arsip bukti belanja.
      */
-    public function index(Request $request): Response|RedirectResponse
+    public function index(Request $request): Response|\Illuminate\Http\RedirectResponse
     {
         $user = $request->user();
         $role = $user->role instanceof UserRole ? $user->role : UserRole::tryFrom((string) $user->role);
 
         // SEC-01: Tolak tegas jika role tidak terdaftar / null
         if (! $role) {
-            abort(403, 'Akses ditolak: Akun Anda tidak memiliki peran (role) yang sah dalam sistem SIKEMAS.');
+            abort(403, 'Akses ditolak: Akun Anda tidak memiliki peran (role) yang sah dalam sistem SIMPEL KAN.');
         }
 
-        // Staf Umum redirects to Aset management as their primary workspace
+        // Staf Umum diarahkan ke modul aset sebagai workspace utama
         if ($role === UserRole::STAF_UMUM) {
             return redirect()->route('aset.index');
         }
 
-        // Kasi Dashboard
-        if ($role === UserRole::KASI) {
-            $data = $this->dashboardService->getKasiDashboard($user);
-            return Inertia::render('Dashboard/KasiDashboard', $data);
-        }
+        $stats = $this->belanjaRepository->getDashboardStats();
+        $recentBelanja = $this->belanjaRepository->getRecent(8);
 
-        // Camat Executive Dashboard
-        if ($role === UserRole::CAMAT) {
-            $data = $this->dashboardService->getCamatDashboard();
-            return Inertia::render('Dashboard/CamatDashboard', $data);
-        }
-
-        // Super Admin, Staf Keuangan & Sekmat Dashboard (Operasional / Monitoring / Verifikasi)
-        if ($role === UserRole::SUPER_ADMIN || $role === UserRole::STAF_KEUANGAN || $role === UserRole::SEKMAT) {
-            $data = $this->dashboardService->getStafSekmatDashboard($role->value);
-            return Inertia::render('Dashboard/StafSekmatDashboard', $data);
-        }
-
-        abort(403, 'Akses ditolak: Peran pengguna tidak sah.');
+        return Inertia::render('Dashboard/Index', [
+            'stats' => $stats,
+            'recentBelanja' => $recentBelanja,
+            'userRole' => $role->value,
+        ]);
     }
 }

@@ -52,7 +52,56 @@ Route::middleware(['auth'])->group(function () {
         Route::delete('/{kegiatan}', [KegiatanController::class, 'destroy'])->name('destroy');
     });
 
-    // === Aset / BMD ===
+    // === V2: Program & Hierarki RAP ===
+    Route::prefix('program')->name('program.')->group(function () {
+        Route::get('/', [\App\Http\Controllers\ProgramController::class, 'index'])->name('index');
+        Route::get('/options', [\App\Http\Controllers\ProgramController::class, 'options'])->name('options');
+        Route::post('/', [\App\Http\Controllers\ProgramController::class, 'storeProgram'])->name('store');
+        Route::put('/{program}', [\App\Http\Controllers\ProgramController::class, 'updateProgram'])->name('update');
+        Route::delete('/{program}', [\App\Http\Controllers\ProgramController::class, 'destroyProgram'])->name('destroy');
+
+        Route::post('/kegiatan', [\App\Http\Controllers\ProgramController::class, 'storeKegiatan'])->name('kegiatan.store');
+        Route::put('/kegiatan/{kegiatan}', [\App\Http\Controllers\ProgramController::class, 'updateKegiatan'])->name('kegiatan.update');
+        Route::delete('/kegiatan/{kegiatan}', [\App\Http\Controllers\ProgramController::class, 'destroyKegiatan'])->name('kegiatan.destroy');
+
+        Route::post('/sub-kegiatan', [\App\Http\Controllers\ProgramController::class, 'storeSubKegiatan'])->name('sub-kegiatan.store');
+        Route::put('/sub-kegiatan/{subKegiatan}', [\App\Http\Controllers\ProgramController::class, 'updateSubKegiatan'])->name('sub-kegiatan.update');
+        Route::delete('/sub-kegiatan/{subKegiatan}', [\App\Http\Controllers\ProgramController::class, 'destroySubKegiatan'])->name('sub-kegiatan.destroy');
+    });
+
+    // === V2: Belanja & Bukti Belanja (Core SPJ) ===
+    Route::prefix('belanja')->name('belanja.')->group(function () {
+        Route::get('/', [\App\Http\Controllers\BelanjaController::class, 'index'])->name('index');
+        Route::get('/create', [\App\Http\Controllers\BelanjaController::class, 'create'])->name('create');
+        Route::post('/', [\App\Http\Controllers\BelanjaController::class, 'store'])->name('store');
+        Route::get('/{belanja}', [\App\Http\Controllers\BelanjaController::class, 'show'])->name('show');
+        Route::get('/{belanja}/edit', [\App\Http\Controllers\BelanjaController::class, 'edit'])->name('edit');
+        Route::put('/{belanja}', [\App\Http\Controllers\BelanjaController::class, 'update'])->name('update');
+        Route::delete('/{belanja}', [\App\Http\Controllers\BelanjaController::class, 'destroy'])->name('destroy');
+        Route::post('/{belanja}/ajukan', [\App\Http\Controllers\BelanjaController::class, 'ajukan'])->name('ajukan');
+
+        // Multi-file Dokumen Bukti
+        Route::post('/{belanja}/dokumen', [\App\Http\Controllers\DokumenBuktiController::class, 'store'])->name('dokumen.store');
+    });
+
+    // Dokumen Bukti delete & download
+    Route::delete('/dokumen-bukti/{dokumen}', [\App\Http\Controllers\DokumenBuktiController::class, 'destroy'])->name('dokumen-bukti.destroy');
+    Route::get('/dokumen-bukti/{dokumen}/download', [\App\Http\Controllers\DokumenBuktiController::class, 'download'])->name('dokumen-bukti.download');
+
+    // === V2: Verifikasi Alur RAP/SPJ ===
+    Route::prefix('verifikasi')->name('verifikasi.')->group(function () {
+        // Sekmat antrean & actions
+        Route::get('/sekmat', [\App\Http\Controllers\VerifikasiController::class, 'sekmatIndex'])->name('sekmat.index');
+        Route::post('/sekmat/{belanja}/setujui', [\App\Http\Controllers\VerifikasiController::class, 'verifikasiSekmat'])->name('sekmat.setujui');
+        Route::post('/sekmat/{belanja}/kembalikan', [\App\Http\Controllers\VerifikasiController::class, 'kembalikanSekmat'])->name('sekmat.kembalikan');
+
+        // Camat antrean & actions
+        Route::get('/camat', [\App\Http\Controllers\VerifikasiController::class, 'camatIndex'])->name('camat.index');
+        Route::post('/camat/{belanja}/setujui', [\App\Http\Controllers\VerifikasiController::class, 'setujuiCamat'])->name('camat.setujui');
+        Route::post('/camat/{belanja}/kembalikan', [\App\Http\Controllers\VerifikasiController::class, 'kembalikanCamat'])->name('camat.kembalikan');
+    });
+
+    // === Aset / BMD (Menu navigasi disembunyikan dari UI, route backend tetap aktif) ===
     Route::prefix('aset')->name('aset.')->group(function () {
         Route::get('/', [AsetController::class, 'index'])->name('index');
         Route::get('/create', [AsetController::class, 'create'])->name('create');
